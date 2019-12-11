@@ -9,7 +9,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String showHome(Model model){
-        model.addAttribute("msg", "welcom home!!");
+        model.addAttribute("date", new java.util.Date());
         return "index";
     }
 }

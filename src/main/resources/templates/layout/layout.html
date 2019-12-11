@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Side Navigation Bar</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-custom" th:replace="layout/header :: header">
+        top menu
+    </nav>
+</div>
+<div class="wrapper">
+    <div class="sidebar" th:replace="layout/side-left::side_left">
+        side left menu
+    </div>
+    <div class="main_content" layout:fragment="main-content">
+            <h1>main content ...</h1>
+    </div>
+    <div class="flex-container" th:replace="layout/side-right::side_right">
+       <h2>side right...</h2>
+    </div>
+</div>
+
+</body>
+</html>
