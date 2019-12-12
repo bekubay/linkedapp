@@ -1,115 +1,161 @@
-*{
+header{
+    background-color: #f3f5f9;
+    color:#04519b;
+    min-height: 100px;
+    padding-top: 25px;
+}
+
+header form{
+    float:right;
+}
+
+header .logo{
+    float:left;
+}
+
+.panel-heading{
+    background-color:#f3f5f9;
+    color: #04519b !important;
+}
+
+.bubble{
+    position: relative;
+    width: 580px;
+    min-height: 65px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.bubble:after{
+    content:'';
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 15px 15px 0;
+    border-color: transparent #fff;
+    display: block;
+    width: 0;
+    z-index: 1;
+    margin-top: -15px;
+    left:-15px;
+    top: 50%;
+}
+
+.bubble:before{
+    content:'';
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 15px 15px 0;
+    border-color: transparent #ccc;
+    display: block;
+    width: 0;
+    z-index: 0;
+    margin-top: -15px;
+    left:-16px;
+    top: 50%;
+}
+
+.post-actions{
+    margin:5px;
+}
+
+.comment-form .form-group{
+    width: 90%;
+}
+
+.comment{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 5px 0;
+    overflow: auto;
+    width:100%;
+}
+
+.comment-form input[type="text"]{
+    width: 100%;
+}
+
+.comment-avatar img{
+    width: 40px;
+    margin-right: 5px;
+}
+
+.friends li{
+    list-style: none;
+    padding:0 5px;
+    display:inline;
+    float:left;
+}
+
+.friends img{
+    width: 55px;
+}
+
+.groups img{
+    width:80px;
+    float:left;
+    margin-right: 15px;
+}
+
+.group-item{
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    overflow: auto;
+}
+
+.profile ul{
+    margin-top: 30px;
+}
+
+.profile li{
+    list-style: none;
+    line-height: 1.9em;
+}
+
+.photos{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+.photos li{
     list-style: none;
-    text-decoration: none;
-    font-family: 'Josefin Sans', sans-serif;
+    float: left;
+    margin:5px;
+    width: 23%;
 }
 
-body{
-    background-color: #f3f5f9;
+.photos img{
+    width:100%;
 }
 
-.wrapper{
-    display: flex;
-    position: relative;
-}
-.navbar-brand, .navbar-nav li a{
-    color: #ffffff!important;
-}
-.navbar-brand, .navbar-nav li a:hover{
-    color: #000!important;
-}
-.navbar-custom{
-    background: #4f6ccc;
-    margin-bottom: 0px;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-}
-.wrapper .sidebar{
-    width: 200px;
-    height: 100%;
-    background: #4f6ccc;
-    position: fixed;
-}
-
-.wrapper .sidebar h2{
-    color: #fff;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.wrapper .sidebar ul li{
-    padding: 15px;
-    border-bottom: 1px solid #bdb8d7;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.wrapper .sidebar ul li a{
-    color: #ffffff!important;
-    display: block;
-}
-
-.wrapper .sidebar ul li a .fas{
-    width: 25px;
-}
-
-.wrapper .sidebar ul li:hover{
-    background-color: #594f8d;
-}
-
-.wrapper .sidebar ul li:hover a{
-    color: #fff;
-}
-
-.wrapper .sidebar .social_media{
-    position: absolute;
+footer{
+    left: 0;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-}
-
-.wrapper .sidebar .social_media a{
-    display: block;
-    width: 40px;
-    background: #594f8d;
-    height: 40px;
-    line-height: 45px;
-    text-align: center;
-    margin: 0 5px;
-    color: #bdb8d7;
-}
-
-.wrapper .main_content{
+    background: #f4f4f4;
     width: 100%;
-    margin-left: 200px;
+    color: #04519b;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 40px;
+    border-top: 7px solid #04519b;
+
 }
 
-.wrapper .main_content .header{
-    padding: 20px;
-    background: #fff;
-    color: #717171;
-    border-bottom: 1px solid #e0e4e8;
-}
-
-.wrapper .main_content .info{
-    margin: 20px;
-    color: #717171;
-    line-height: 25px;
-}
-.wrapper .main_content .info div{
+.members .member-row{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
     margin-bottom: 20px;
 }
 
-.flex-container {
-    display: flex;
-    justify-content: flex-end;
-    background-color: #ffffff;
-    width: 20%;
-    height: 100%;
+.members img{
+    margin-bottom: 5px;
+}
+
+@media(min-width: 991px){
+    .members p{
+        padding-top: 40px;
+    }
 }
