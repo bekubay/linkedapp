@@ -12,7 +12,7 @@
         <header  th:replace="layout/header :: header">
                 header
         </header>
-        <nav class="navbar navbar-default"  layout:fragment="navigation">
+        <nav class="navbar navbar-default"  th:replace="layout/navigation::navigation">
             navigation
         </nav>
         <section layout:fragment="main_section">

@@ -12,12 +12,20 @@
         <header  th:replace="layout/header :: header">
             header
         </header>
-        <nav class="navbar navbar-default"  layout:fragment="navigation_user">
+        <nav class="navbar navbar-default"  th:replace="layout/navigation_user::navigation_user">
             navigation
         </nav>
-        <section layout:fragment="main_section">
-            <div class="main_content">
-                <h1>main content ...</h1>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8"  layout:fragment="main_section">
+                        <h1>main content ...</h1>
+                    </div>
+                    <div class="col-md-4" th:replace="layout/adverts_panel::adverts_panel">
+                        <h1>adverts panel</h1>
+                    </div>
+                </div>
+            </div>
             </div>
         </section>
         <footer th:replace="layout/footer::footer">

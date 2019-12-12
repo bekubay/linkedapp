@@ -1,17 +1,53 @@
 package edu.mum.linkedapp.controller;
 
+import edu.mum.linkedapp.domain.User;
+import edu.mum.linkedapp.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.naming.Binding;
+import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class UserController {
-    @GetMapping("/login")
-    public String loginPage(){
-        return "login";
+
+    @Autowired
+    private IUserService userService;
+    @PostMapping("/signup")
+    public String signUp(@Valid User user, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()){
+            return "index";
+        }
+        if(userService.save(user)) {
+            return "redirect:/success";
+        }
+        model.addAttribute("message","Password doesn't match");
+        return "index";
     }
-    @GetMapping("/signup")
-    public String signupPage(){
-        return "user/signup";
+    @GetMapping("/success")
+    public String signup_success(){
+        return "signup_success";
+    }
+    @GetMapping("/profile")
+    public String profile(){
+        return "profile";
+    }
+    @GetMapping("/followers")
+    public String followers(){
+        return "followers";
+    }
+    @GetMapping("/following")
+    public String following(){
+        return "following";
     }
 }
