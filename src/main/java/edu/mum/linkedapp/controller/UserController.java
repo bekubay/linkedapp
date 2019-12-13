@@ -12,17 +12,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.naming.Binding;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
 
     @Autowired
     private IUserService userService;
+
     @PostMapping("/signup")
     public String signUp(@Valid User user, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){
@@ -38,15 +42,10 @@ public class UserController {
     public String signup_success(){
         return "signup_success";
     }
-    @GetMapping("/user/profile")
-    public String profile(){
-        return "profile";
-    }
+    
     @GetMapping("/user/followers")
     public String followers(Model model){
         model.addAttribute("users", userService.findAll());
-        return "followers";
-    }
     @GetMapping("/user/following")
     public String following(Model model){
         model.addAttribute("users", userService.findAll());
@@ -59,5 +58,11 @@ public class UserController {
         return "users";
     }
 
-
+     @GetMapping("/user/profile")
+    public String showProfile(Model model){
+        Optional<User> user = userService.findById(1L);
+        System.out.println(user.get().getUsername());
+        model.addAttribute("user", user.get());
+        return "profile";
+    }
 }

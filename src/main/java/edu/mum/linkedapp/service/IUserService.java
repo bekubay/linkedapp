@@ -9,4 +9,6 @@ public interface IUserService {
     boolean save(User user);
     Optional<User> findByUsername(String username);
     List<User> findAll();
+    Optional<User> findById(Long id);
+
 }

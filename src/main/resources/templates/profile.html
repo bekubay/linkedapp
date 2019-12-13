@@ -24,12 +24,12 @@
             </div>
             <div class="col-md-8">
               <ul>
-                <li><strong>Name:</strong>Doug Walter</li>
-                <li><strong>Email:</strong>doug@gmail.com</li>
-                <li><strong>City:</strong>Boston</li>
-                <li><strong>State:</strong>Massachusetts</li>
-                <li><strong>Gender:</strong>Male</li>
-                <li><strong>DOB:</strong>September 16th</li>
+                <li><strong>Name: </strong><span th:text = "  ${user.firstname +' ' + user.lastname}"></span></li> <br>
+                <li><strong>Email: </strong><span th:text = "  ${user.email}"></span></li><br>
+<!--                <li><strong>City:</strong><span th:text #{user.city}></span></li>-->
+<!--                <li><strong>State:</strong><span th:text #{user.state}></span></li>-->
+<!--                <li><strong>Gender:</strong><span th:text #{user.gender}></span></li>-->
+                <li><strong>DOB: </strong><span th:text = "  ${user.dob}"></span></li>
               </ul>
             </div>
           </div><br><br>
