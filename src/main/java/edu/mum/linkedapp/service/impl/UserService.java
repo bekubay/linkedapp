@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements IUserService {
@@ -16,12 +17,16 @@ public class UserService implements IUserService {
 
     @Override
     public boolean save(User user) {
+        user.setActive(1);
         userRepository.save(user);
         return true;
     }
 
     @Override
-    public User findByUsername(String username) {
+    public Optional<User> findByUsername(String username) {
+        System.out.println("Service-----------------------------");
+        System.out.println(username);
+        System.out.println("Service -----------------------------");
         return userRepository.findByUsername(username);
     }
 

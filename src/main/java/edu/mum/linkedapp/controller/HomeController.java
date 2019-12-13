@@ -13,7 +13,7 @@ public class HomeController {
         model.addAttribute("user", new User());
         return "index";
     }
-    @GetMapping({"/home"})
+    @GetMapping({"/user/home"})
     public String home(Model model){
         model.addAttribute("user", new User());
         return "user_timeline";
