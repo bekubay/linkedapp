@@ -31,7 +31,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/", "/login").permitAll()
-                .and().formLogin().loginPage("/login");
+                .and().formLogin().loginPage("/login").defaultSuccessUrl("/user/home");
 
         //Those two settings below is to enable access h2 database via browser
         http.csrf().disable();

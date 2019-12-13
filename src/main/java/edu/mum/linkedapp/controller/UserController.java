@@ -44,8 +44,11 @@ public class UserController {
     }
     
     @GetMapping("/user/followers")
-    public String followers(Model model){
+    public String followers(Model model) {
         model.addAttribute("users", userService.findAll());
+        return "followers";
+    }
+
     @GetMapping("/user/following")
     public String following(Model model){
         model.addAttribute("users", userService.findAll());
