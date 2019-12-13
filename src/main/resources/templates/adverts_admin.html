@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout_user}">
+<head>
+  <meta charset="utf-8">
+  <title>LinkedApp Social Network</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+  <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"/>
+</head>
+
+<body>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8" layout:fragment="main_section">
+        <div class="profile">
+          <h1 class="page-header">Adverts</h1>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Add New Advert</h3>
+                </div>
+                <div class="panel-body">
+                  <form>
+                    <div class="form-group">
+                      <textarea class="form-control" placeholder="Advertisers' website ..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                    <div class="pull-right">
+                      <div class="btn-toolbar">
+                        <button type="button" class="btn btn-default"><i class="fa fa-file-image-o"></i>Advertiser Image</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+          <div class="row">
+            <div class="col-md-4">
+              <img th:src="@{/img/sample1.jpg}" class="img-thumbnail" alt="">
+            </div>
+            <div class="col-md-8">
+              <ul>
+                <li><strong>Advertiser Website:</strong>www.dougmail.com</li>
+              </ul>
+            </div>
+          </div><br><br>
+          <div class="row">
+            <div class="col-md-4">
+              <img th:src="@{/img/sample2.jpg}" class="img-thumbnail" alt="">
+            </div>
+            <div class="col-md-8">
+              <ul>
+                <li><strong>Advertiser Website:</strong>www.dougmail.com</li>
+              </ul>
+            </div>
+          </div><br><br>
+          <div class="row">
+            <div class="col-md-4">
+              <img th:src="@{/img/sample3.jpg}" class="img-thumbnail" alt="">
+            </div>
+            <div class="col-md-8">
+              <ul>
+                <li><strong>Advertiser Website:</strong>www.dougmail.com</li>
+              </ul>
+            </div>
+          </div><br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</body>
+</html>

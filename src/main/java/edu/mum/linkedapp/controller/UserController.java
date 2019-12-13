@@ -38,20 +38,27 @@ public class UserController {
         model.addAttribute("message","Password doesn't match");
         return "index";
     }
-    @GetMapping("/success")
+    @GetMapping("/user/success")
     public String signup_success(){
         return "signup_success";
     }
-    @GetMapping("/followers")
-    public String followers(){
-        return "followers";
-    }
-    @GetMapping("/following")
-    public String following(){
+    
+    @GetMapping("/user/followers")
+    public String followers(Model model){
+        model.addAttribute("users", userService.findAll());
+    @GetMapping("/user/following")
+    public String following(Model model){
+        model.addAttribute("users", userService.findAll());
         return "following";
     }
 
-    @GetMapping("/profile")
+    @GetMapping("/admin/users")
+    public String usersAll(Model model){
+        model.addAttribute("users", userService.findAll());
+        return "users";
+    }
+
+     @GetMapping("/user/profile")
     public String showProfile(Model model){
         Optional<User> user = userService.findById(1L);
         System.out.println(user.get().getUsername());

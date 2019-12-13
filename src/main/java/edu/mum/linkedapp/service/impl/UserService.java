@@ -20,13 +20,17 @@ public class UserService implements IUserService {
 
     @Override
     public boolean save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(1);
+        //user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
     }
 
     @Override
-    public User findByUsername(String username) {
+    public Optional<User> findByUsername(String username) {
+        System.out.println("Service-----------------------------");
+        System.out.println(username);
+        System.out.println("Service -----------------------------");
         return userRepository.findByUsername(username);
     }
 

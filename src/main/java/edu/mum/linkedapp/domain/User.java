@@ -9,8 +9,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.Collection;
-
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Data
@@ -31,18 +31,18 @@ public class User implements Serializable {
     private String lastname;
     private String email;
     private String dob;
+
+    @Column(name = "active")
+    private int active;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
     @Transient
     private String confirm_password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
-
+    
 
     public User(String username, String password, String firstname, String lastname,
                     String email, String dob, Collection<Role> roles ){
@@ -54,5 +54,4 @@ public class User implements Serializable {
         this.dob = dob;
         this.roles = roles;
     }
-
 }
