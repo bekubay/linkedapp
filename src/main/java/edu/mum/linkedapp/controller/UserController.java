@@ -82,6 +82,7 @@ public class UserController {
     public String showProfile(Model model, Principal principal){
 
         model.addAttribute("user", userService.findByUsername(principal.getName()).get());
+        System.out.println("commit this");
         return "profile";
     }
 
