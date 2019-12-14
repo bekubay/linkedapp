@@ -45,6 +45,7 @@ public class UserController {
         model.addAttribute("users", userService.findAll());
         return "followers";
     }
+
     @GetMapping("/user/following")
     public String following(Model model){
         model.addAttribute("users", userService.findAll());
