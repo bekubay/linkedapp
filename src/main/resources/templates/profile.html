@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <title>LinkedApp Social Network</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../static/css/style.css" th:href="@{css/style.css}"/>
+  <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
   <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"/>
 </head>
 
@@ -17,7 +17,7 @@
     <div class="row">
       <div class="col-md-8" layout:fragment="main_section">
         <div class="profile">
-          <h1 class="page-header">Douglas Walter</h1>
+          <h1 class="page-header" th:text = "  ${user.firstname +' ' + user.lastname}"></h1>
           <div class="row">
             <div class="col-md-4">
               <img src="img/user.png" class="img-thumbnail" alt="">
@@ -47,9 +47,13 @@
                     <button type="submit" class="btn btn-default">Submit</button>
                     <div class="pull-right">
                       <div class="btn-toolbar">
-                        <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>
-                        <button type="button" class="btn btn-default"><i class="fa fa-file-image-o"></i>Image</button>
-                        <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button>
+                        <button type="button" class="btn btn-default">
+                          <i class="fa fa-file-image-o"></i>Image / <i class="fa fa-file-video-o"></i>Video</span>
+                          <input type="file" id="myfile" class="myfile" name="myfile" accept="video/*,  video/x-m4v, video/webm, video/x-ms-wmv, video/x-msvideo, video/3gpp, video/flv, video/x-flv, video/mp4, video/quicktime, video/mpeg, video/ogv, .ts, .mkv, image/*, image/heic, image/heif" display="inline" />
+                        </button>
+<!--                        <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>-->
+<!--                        <button type="button" class="btn btn-default"><i class="fa fa-file-image-o"></i>Image</button>-->
+<!--                        <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button>-->
                       </div>
                     </div>
                   </form>

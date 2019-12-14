@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8">
         <title>LinkedApp Social Network</title>
@@ -25,10 +24,11 @@
                         <li><a href="/user/profile">Profile</a></li>
                         <li><a href="/user/followers">Followers</a></li>
                         <li><a href="/user/following">Following</a></li>
-                        <li><a href="/admin/users">Users</a></li>
-                        <li><a href="/admin/adverts">Adverts</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a href="/admin/users">Users</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a href="/admin/adverts">Adverts</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/user/home"><span class="glyphicon glyphicon-user" sec:authentication="name"></span></a></li>
                         <li><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
