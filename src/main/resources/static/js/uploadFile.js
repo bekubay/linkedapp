@@ -1,15 +1,16 @@
 $(function () {
-    $("#imgSubmit").click(function () {
-        var form = $("#uploadPost")[0];
-        var data = new FormData(form);
-        $.ajax("upload", {
-            type : "POST",
-            processData : false,
-            contentType : false,
-            enctype : "multipart/form-data",
-            data : data
+    $("#postSubmit").click(function () {
+        var content = $("#postTextArea").val();
+        if (content.length == 0) {
+            alert("Content should not plain");
+            return;
+        }
+        $.post("/user/submitPost", {
+            content : content,
+            contentType:'application/json;charset=utf-8'
         }).done(function (data) {
-            alert(data);
+            var od = JSON.stringify(data);
+            alert(od);
         }).fail(function (xhr, status, exception) {
             alert(status, exception);
         });
@@ -29,10 +30,9 @@ $(function () {
             enctype : "multipart/form-data",
             data : formData
         }).done(function (data) {
-            alert(data);
+            $("#postTextArea").append("<br>" + data);
         }).fail(function (xhr, status, exception) {
             alert(status, exception);
         });
-        // 这里写一个ajax把通过post把this.files[0]提交到后台就可以了。
     })
 });

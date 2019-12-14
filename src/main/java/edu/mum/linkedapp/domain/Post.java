@@ -18,8 +18,10 @@ import edu.mum.linkedapp.domain.User;
 public class Post implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Lob
     private String text;
 
     private String attach;

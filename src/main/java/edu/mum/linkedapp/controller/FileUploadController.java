@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -28,15 +29,22 @@ public class FileUploadController {
 		this.storageService = storageService;
 	}
 
-	@GetMapping("/uploadFile")
-	public String listUploadedFiles(Model model) throws IOException {
-
-		model.addAttribute("files", storageService.loadAll().map(
+	@PostMapping(value = "/uploadFile", produces = "text/plain")
+	@ResponseBody
+	public String handleFileUpload(@RequestParam("file") MultipartFile file) {
+		System.out.println("here...");
+		storageService.store(file);
+		List<String> list = storageService.loadAll().map(
 				path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
 						"serveFile", path.getFileName().toString()).build().toString())
-				.collect(Collectors.toList()));
-
-		return "uploadForm";
+				.collect(Collectors.toList());
+		String fileName = "";
+		for (String name: list) {
+			if (name.contains(file.getOriginalFilename())) {
+				fileName = name;
+			}
+		}
+		return fileName;
 	}
 
 	@GetMapping("/files/{filename:.+}")
@@ -46,17 +54,6 @@ public class FileUploadController {
 		Resource file = storageService.loadAsResource(filename);
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
 				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
-	}
-
-	@PostMapping("/uploadFile")
-	public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
-
-		storageService.store(file);
-		redirectAttributes.addFlashAttribute("message",
-				"You successfully uploaded " + file.getOriginalFilename() + "!");
-
-		return "redirect:/";
 	}
 
 	@ExceptionHandler(StorageFileNotFoundException.class)
