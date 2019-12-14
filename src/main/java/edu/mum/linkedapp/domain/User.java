@@ -4,11 +4,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -22,15 +24,30 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "NotEmpty")
-    @Column(name = "username", unique = true)
+    @Column( unique = true, length=(250))
+    @Size(min=3, max =12, message = "{size.username.validation}")
     private String username;
 
+    @NotEmpty (message = "{NotEmpty}")
+    @Size(min=3, max =12, message = "{size.password.validation}")
     private String password;
+
+    @NotNull
+    @NotEmpty (message = "{NotEmpty}")
     private String firstname;
+
+    @NotNull
+    @NotEmpty (message = "{NotEmpty}")
     private String lastname;
+
+    @NotNull
+    @NotEmpty (message = "{NotEmpty}")
+    @Email
     private String email;
-    private String dob;
+
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dob;
 
     @Column(name = "active")
     private int active;
@@ -40,12 +57,14 @@ public class User implements Serializable {
     private Set<Role> roles;
 
     @Transient
+    @NotNull
+    @NotEmpty
     private String confirm_password;
 
     
 
     public User(String username, String password, String firstname, String lastname,
-                    String email, String dob, Set<Role> roles ){
+                    String email, Date dob, Set<Role> roles ){
         this.username = username;
         this.password = password;
         this.firstname = firstname;

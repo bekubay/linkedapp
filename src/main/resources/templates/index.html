@@ -16,37 +16,43 @@
 </nav>
 
 <section layout:fragment="main_section">
-    <div class="signup-form" >
+    <div class="signup-form" th:align="center" >
         <form action="#" method="post" th:action="@{/signup}" th:object="${user}" th:method="post">
             <label style="color: red" th:text="${message}"></label>
             <h4>Create an Account</h4>
-            <div class="form-group">
-                <input type="text" class="form-control input-lg" name="username" th:field="*{username}" placeholder="username">
-                <label class="error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></label>
+            <div class="form-group" >
+                <span class="errorMessage" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                <input type="text" class="form-control" th:field="*{username}" placeholder="Enter user name"/>
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control input-lg" name="firstname"  th:field="*{firstname}"placeholder="Firstname">
+                <span  class="errorMessage" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></span>
+                <input type="text" class="form-control" name="firstname"  th:field="*{firstname}"placeholder="Firstname">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control input-lg" name="lastname"  th:field="*{lastname}" placeholder="Lastname" required="required">
-            </div>
-
-            <div class="form-group">
-                <input type="Date" class="form-control input-lg" name="dob" th:field="*{dob}" placeholder="dob" required="required">
+                <span  class="errorMessage" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+                <input type="text" class="form-control" name="lastname"  th:field="*{lastname}" placeholder="Lastname" >
             </div>
 
             <div class="form-group">
-                <input type="email" class="form-control input-lg" name="email" th:field="*{email}" placeholder="Email Address" required="required">
+                <span  class="errorMessage" th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"></span>
+                <input type="Date" class="form-control" name="dob" th:field="*{dob}" placeholder="dob" >
+            </div>
+
+            <div class="form-group">
+                <span class="errorMessage" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                <input type="email" class="form-control" name="email" th:field="*{email}" placeholder="Email Address" >
             </div>
             <div class="form-group">
-                <input type="password" class="form-control input-lg" name="password" th:field="*{password}" placeholder="Password" required="required">
+                <span class="errorMessage" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                <input type="password" class="form-control" name="password" th:field="*{password}" placeholder="Password" >
             </div>
             <div class="form-group">
-                <input type="password" class="form-control input-lg" name="confirm_password" th:field="*{confirm_password}" placeholder="Confirm Password" required="required">
+                <span class="errorMessage" th:if="${#fields.hasErrors('confirm_password')}" th:errors="*{confirm_password}"></span>
+                <input type="password" class="form-control" name="confirm_password" th:field="*{confirm_password}" placeholder="Confirm Password">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success btn-lg btn-block signup-btn">Sign Up</button>
+                <button type="submit" class="btn btn-success btn-block signup-btn">Sign Up</button>
             </div>
             <div class="or-seperator"><b>or</b></div>
 
