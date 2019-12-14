@@ -12,6 +12,8 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -61,7 +63,11 @@ public class User implements Serializable {
     @NotEmpty
     private String confirm_password;
 
-    
+    @OneToMany(mappedBy="followers")
+    private List<Follow> followedBy;
+
+    @OneToMany(mappedBy="follows")
+    private List<Follow> following;
 
     public User(String username, String password, String firstname, String lastname,
                     String email, Date dob, Set<Role> roles ){
