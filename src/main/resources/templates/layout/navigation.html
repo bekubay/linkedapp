@@ -16,19 +16,21 @@
                     <form class="form-inline" method="post" th:action="@{/login}" th:method="post">
                         <div class="form-group">
                             <label class="sr-only" for="usernameLogin">Username</label>
-                            <input type="username" name="username" class="form-control" id="usernameLogin" placeholder="Username">
+                            <input type="username" name="username" class="form-control"
+                                   id="usernameLogin" th:placeholder="#{navigation.user.username}">
                         </div>
                         <div class="form-group">
                             <label class="sr-only" for="loginPassword">Password</label>
-                            <input type="password" name="password" class="form-control" id="loginPassword" placeholder="Password">
+                            <input type="password" name="password" class="form-control"
+                                   id="loginPassword" th:placeholder="#{navigation.user.password}">
                         </div>
-                        <button type="submit" class="btn btn-default">Sign in</button><br>
+                        <button type="submit" class="btn btn-default" th:text="#{navigation.button.signin}"></button><br>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Remember me
+                                <input type="checkbox" th:text="#{navigation.radio.rememberme}">
                             </label>
                         </div>
-                        <span class="alert-danger" th:text="@{errorMessge}"></span>
+                        <span class="alert-danger" th:text="#{errorMessge}"></span>
                     </form>
                 </div><!--/.nav-collapse -->
             </div>
