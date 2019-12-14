@@ -64,10 +64,10 @@ public class User implements Serializable {
     private String confirm_password;
 
     @OneToMany(mappedBy="followers")
-    private List<Follow> followedBy;
+    private Set<Follow> followedBy;
 
     @OneToMany(mappedBy="follows")
-    private List<Follow> following;
+    private Set<Follow> following;
 
     public User(String username, String password, String firstname, String lastname,
                     String email, Date dob, Set<Role> roles ){

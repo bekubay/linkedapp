@@ -72,19 +72,16 @@ public class UserController {
         return "following";
     }
 
-    @GetMapping("/admin/users")
+    @GetMapping("/user/users")
     public String usersAll(Model model){
         model.addAttribute("users", userService.findAll());
         return "users";
     }
+    @GetMapping("/user/follow/{username}")
+    public String showUserProfile(@PathVariable("username") String username, Model model, Principal principal){
+        model.addAttribute("user", userService.findByUsername(username).get());
 
-     @GetMapping("/user/profile")
-    public String showProfile(Model model, Principal principal){
-
-        model.addAttribute("user", userService.findByUsername(principal.getName()).get());
-        System.out.println("commit this");
         return "profile";
     }
-
 
 }

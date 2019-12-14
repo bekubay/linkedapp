@@ -24,7 +24,7 @@
                         <li><a href="/user/profile" th:text="#{navigation-user.profile}"></a></li>
                         <li><a href="/user/followers" th:text="#{navigation-user.followers}" ></a></li>
                         <li><a href="/user/following" th:text="#{navigation-user.following}"></a></li>
-                        <li sec:authorize="hasRole('ADMIN')"><a href="/admin/users" th:text="#{navigation-user.users}"></a></li>
+                        <li><a href="/user/users" th:text="#{navigation-user.users}"></a></li>
                         <li sec:authorize="hasRole('ADMIN')"><a href="/admin/adverts" th:text="#{navigation-user.advertise}"></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
