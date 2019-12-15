@@ -1,5 +1,6 @@
 package edu.mum.linkedapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,6 +27,7 @@ public class User implements Serializable {
     @Size(min=3, max =12, message = "{size.username.validation}")
     private String username;
 
+    @JsonIgnore
     @NotEmpty (message = "{NotEmpty}")
     @Size(min=3, max =12, message = "{size.password.validation}")
     private String password;
@@ -49,21 +51,28 @@ public class User implements Serializable {
 
     @Column(name = "active")
     private int active;
+
     @ToString.Exclude
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    @Column(name = "head_portrait")
+    private String portrait;
+
+    @JsonIgnore
     @Transient
 //    @NotNull
 //    @NotEmpty
     private String confirm_password;
+
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_network",
             joinColumns = @JoinColumn(name = "follower_id"),
             inverseJoinColumns = @JoinColumn(name = "followee_id"))
     private Set<User> following = new HashSet<>();
+
     @ToString.Exclude
     @ManyToMany(mappedBy = "following",fetch = FetchType.EAGER)
     private Set<User> followers = new HashSet<>();

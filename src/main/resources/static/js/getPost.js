@@ -20,7 +20,7 @@ $(function () {
         var itemDetail = '';
         itemDetail += '<div class="panel panel-default post" id="' + postItem.id + '">';
         itemDetail += '<div class="panel-body"><div class="row"><div class="col-sm-2">';
-        itemDetail += '<a th:href="@{/user/follow/' + postItem.owner.username + '}" class="post-avatar thumbnail"><img th:src="@{/img/user.png}" alt=""><div class="text-center">'+ postItem.owner.username +'</div></a>';
+        itemDetail += '<a th:href="@{/user/follow/' + postItem.owner.username + '}" class="post-avatar thumbnail"><img src="' + ((postItem.owner.portrait != null && postItem.owner.portrait !== "") ? postItem.owner.portrait : "/img/user.png") + '" alt="' + postItem.owner.username + '"/><div class="text-center">'+ postItem.owner.username +'</div></a>';
         itemDetail += '<div class="likes text-center" id="likeCount">7 Likes</div></div>';
         itemDetail += '<div class="col-sm-10"><div class="bubble"><div class="pointer"><p>';
         if (postItem.attachType == 0) {
@@ -48,4 +48,20 @@ $(function () {
         itemDetail += '</div></div></div></div></div>';
         return itemDetail;
     }
+    
+    function initData() {
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            url: "/user/allPosts"
+        }).done(function (data) {
+            $.each(data, function (index, value) {
+                $("#postList").prepend($.addItem(value));
+            });
+        }).fail(function (xhr, status, exception) {
+            alert(status, exception);
+        });
+    }
+
+    initData();
 });
