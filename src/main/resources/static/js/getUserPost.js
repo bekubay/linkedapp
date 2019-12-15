@@ -1,4 +1,6 @@
 $(function () {
+
+
     $("#postSubmit").click(function () {
         var content = $("#postTextArea").val();
         if (content.length == 0) {
@@ -48,12 +50,12 @@ $(function () {
         itemDetail += '</div></div></div></div></div>';
         return itemDetail;
     }
-    
+
     function initData() {
         $.ajax({
             type: 'GET',
             dataType: "json",
-            url: "/user/allPosts"
+            url: "/user/" + $("#postList").attr("value") + "/allPosts"
         }).done(function (data) {
             $.each(data, function (index, value) {
                 $("#postList").prepend($.addItem(value));

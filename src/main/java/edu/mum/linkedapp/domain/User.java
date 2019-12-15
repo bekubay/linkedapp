@@ -77,9 +77,9 @@ public class User implements Serializable {
     @ManyToMany(mappedBy = "following",fetch = FetchType.EAGER)
     private Set<User> followers = new HashSet<>();
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn
-    private Profile profile;
+//    @OneToOne(cascade=CascadeType.ALL)
+//    @JoinColumn
+//    private Profile profile;
 
     public User(String username, String password, String firstname, String lastname,
                     String email, Date dob, Set<Role> roles ){

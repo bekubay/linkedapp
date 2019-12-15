@@ -23,8 +23,8 @@ public class Profile implements Serializable {
     @JoinColumn
     private Address address;
 
-    @OneToOne(mappedBy = "profile")
-    private User user;
+//    @OneToOne(mappedBy = "profile")
+//    private User user;
 
 
 }

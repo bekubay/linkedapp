@@ -81,9 +81,9 @@ public class UserService implements IUserService {
     @Override
     public void updateProfilePicture(String username,String url) {
         User user = userRepository.findByUsername(username).get();
-        Profile profile = new Profile();
-        profile.setProfile_pic_url(url);
-        user.setProfile(profile);
+//        Profile profile = new Profile();
+//        profile.setProfile_pic_url(url);
+        user.setPortrait(url);
         userRepository.save(user);
     }
 }

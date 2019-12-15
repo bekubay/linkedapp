@@ -22,7 +22,7 @@ public class ProfileController {
 
         User user = userService.findByUsername(principal.getName()).get();
         try {
-            model.addAttribute("profilepath", user.getProfile().getProfile_pic_url());
+            model.addAttribute("profilepath", user.getPortrait()); //.getProfile().getProfile_pic_url()
         }catch(Exception ex){
             System.out.println("no profile picture");
         }
@@ -34,7 +34,7 @@ public class ProfileController {
     public String showUserProfile(@PathVariable("username") String username, Model model, Principal principal){
         User user = userService.findByUsername(username).get();
         try {
-            model.addAttribute("profilepath", new File("").getAbsolutePath() + "/upload-dir/" + user.getProfile().getProfile_pic_url());
+            model.addAttribute("profilepath", new File("").getAbsolutePath() + "/upload-dir/" + user.getPortrait());
         }catch(Exception ex){
             System.out.println("no profile picture");
         }

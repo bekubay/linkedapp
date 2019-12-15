@@ -65,8 +65,9 @@ public class PostController {
         return post;
     }
 
-    @GetMapping("/{id}/posts")
+    @GetMapping("/{id}/allPosts")
     public @ResponseBody List<Post> getAllPostsByUserId(@PathVariable("id") Long userId) {
+        System.out.println("userId: " + userId);
         List<Post> allPosts = postService.getAllPostsByUserId(userId);
         return allPosts;
     }
