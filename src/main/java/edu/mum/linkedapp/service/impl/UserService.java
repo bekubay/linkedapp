@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService implements IUserService {
@@ -49,5 +46,35 @@ public class UserService implements IUserService {
     @Override
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
+    }
+
+    @Override
+    public  void follow(String username, String followeeUsername){
+        User user = userRepository.findByUsername(username).get();
+        User followeeUser = userRepository.findByUsername(followeeUsername).get();
+        Set<User> followees;
+        if (!user.getFollowing().isEmpty()) {
+            followees = new HashSet<User>(user.getFollowing());
+        }else{
+            followees = new HashSet<User>();
+        }
+        user.addFollowee(followeeUser);
+        userRepository.save(user);
+    }
+    @Override
+    public List<User> findFollowers(String username){
+        return userRepository.findFollowers(username);
+    }
+    @Override
+    public List<User> findFollowing(String username){
+        return userRepository.findFollowing(username);
+    }
+
+    @Override
+    public void unfollow(String username, String followeeUsername) {
+        User user = userRepository.findByUsername(username).get();
+        User followeeUser = userRepository.findByUsername(followeeUsername).get();
+        user.removeFollowee(followeeUser);
+        userRepository.save(user);
     }
 }

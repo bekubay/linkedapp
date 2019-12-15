@@ -61,27 +61,35 @@ public class UserController {
     }
     
     @GetMapping("/user/followers")
-    public String followers(Model model) {
-        model.addAttribute("users", userService.findAll());
+    public String followers(Model model, Principal principal) {
+        model.addAttribute("users", userService.findFollowers(principal.getName()));
+        model.addAttribute("thisUser", userService.findByUsername(principal.getName()).get());
         return "followers";
     }
 
     @GetMapping("/user/following")
-    public String following(Model model){
-        model.addAttribute("users", userService.findAll());
+    public String following(Model model, Principal principal){
+        model.addAttribute("users", userService.findFollowing(principal.getName()));
+        model.addAttribute("thisUser", userService.findByUsername(principal.getName()).get());
         return "following";
     }
 
     @GetMapping("/user/users")
-    public String usersAll(Model model){
-        model.addAttribute("users", userService.findAll());
+    public String usersAll(Model model, Principal principal){
+        List<User> users = userService.findAll();
+        model.addAttribute("users", users);
+        model.addAttribute("thisUser", userService.findByUsername(principal.getName()).get());
         return "users";
     }
     @GetMapping("/user/follow/{username}")
-    public String showUserProfile(@PathVariable("username") String username, Model model, Principal principal){
-        model.addAttribute("user", userService.findByUsername(username).get());
-
-        return "profile";
+    public String showUserFollow(@PathVariable("username") String username, Model model, Principal principal){
+        userService.follow(principal.getName(),username);
+        return "redirect:/user/users";
+    }
+    @GetMapping("/user/unfollow/{username}")
+    public String showUserUnfollow(@PathVariable("username") String username, Model model, Principal principal){
+        userService.unfollow(principal.getName(),username);
+        return "redirect:/user/users";
     }
 
 }
