@@ -25,38 +25,31 @@ public class PostController {
     @Autowired
     UserService userService;
 
-    public static final String URL_REGEX = "^((https?|ftp)://|(www|ftp)\\.)?[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?$";
+    public static final Pattern urlPattern= Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]",
+            Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 
     @RequestMapping(value = "/submitPost", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Post submitPost(@RequestParam("content") String content, Model model, Principal principal) {
-        Pattern p = Pattern.compile(URL_REGEX);
-        Matcher m = p.matcher("content");//replace with string to compare
-        if(m.find()) {
-            System.out.println("String contains URL");
-        }
+        Matcher m = urlPattern.matcher(content);//replace with string to compare
         boolean result = m.find();
-        String attach = "";
         int attachType = 0;
-        while (result) {
-            for (int i = 1; i <= m.groupCount(); i++) {
-                attach = m.group(i);
-                if (attach.startsWith("http://localhost:8080")) {
-                    content = content.replace(attach, "");
-                    break;
-                }
-            }
-            attach = "";
-            result = m.find();
+        String attach = "";
+        if (result) {
+            System.out.println("String contains URL");
+            attach = m.group(0);
         }
+
 //      video/*,  video/x-m4v, video/webm, video/x-ms-wmv, video/x-msvideo, video/3gpp, video/flv, video/x-flv, video/mp4, video/quicktime, video/mpeg, video/ogv, .ts, .mkv,
 //      image/*, image/heic, image/heif
-
-        if (attach.endsWith("jpg") || attach.endsWith("jpeg") || attach.endsWith("png") ||
-                attach.endsWith("gif") || attach.endsWith("heic") || attach.endsWith("heif")) {
+        String lowcaseAttach = attach.toLowerCase();
+        if (lowcaseAttach.endsWith(".jpg") || lowcaseAttach.endsWith(".jpeg") || lowcaseAttach.endsWith(".png") ||
+                lowcaseAttach.endsWith(".gif") || lowcaseAttach.endsWith(".heic") || lowcaseAttach.endsWith(".heif")) {
             attachType = 1;
+            System.out.println("image.attachType." + attachType + ": " + attach);
         } else {
-            attachType = attach.length() > 0 ? 2 : 0;
+            attachType = (attach != null && attach.length() > 0) ? 2 : 0;
+            System.out.println("video/text.attachType." + attachType + ": " + attach);
         }
         System.out.println("begin to user");
         User user = userService.findByUsername(principal.getName()).get();
