@@ -15,4 +15,6 @@ public interface IUserService {
     List<User> findFollowing(String username);
 
     void unfollow(String username, String followeeUsername);
+
+    void updateProfilePicture(String username,String url);
 }

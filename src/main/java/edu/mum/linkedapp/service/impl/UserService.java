@@ -1,5 +1,6 @@
 package edu.mum.linkedapp.service.impl;
 
+import edu.mum.linkedapp.domain.Profile;
 import edu.mum.linkedapp.domain.Role;
 import edu.mum.linkedapp.domain.User;
 import edu.mum.linkedapp.repository.IRoleRepository;
@@ -75,6 +76,14 @@ public class UserService implements IUserService {
         User user = userRepository.findByUsername(username).get();
         User followeeUser = userRepository.findByUsername(followeeUsername).get();
         user.removeFollowee(followeeUser);
+        userRepository.save(user);
+    }
+    @Override
+    public void updateProfilePicture(String username,String url) {
+        User user = userRepository.findByUsername(username).get();
+        Profile profile = new Profile();
+        profile.setProfile_pic_url(url);
+        user.setProfile(profile);
         userRepository.save(user);
     }
 }
