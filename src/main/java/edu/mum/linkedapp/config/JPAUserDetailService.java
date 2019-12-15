@@ -19,7 +19,6 @@ public class JPAUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userService.findByUsername(username);
-        System.out.println(user.get().getUsername());
         user.orElseThrow(() -> new UsernameNotFoundException("Not FOUND..."));
         return new JPAUserDetails(user.get());
     }
