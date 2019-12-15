@@ -20,13 +20,21 @@
           <h1 class="page-header" th:text = "  ${user.firstname +' ' + user.lastname}"></h1>
           <div class="row">
             <div class="col-md-4">
-              <img th:src="@{/img/user.png}" class="img-thumbnail" alt="">
-              <form>
-                <button type="submit" class="btn btn-default">Upload</button>
-                <button type="button" class="btn btn-default">
-                  <i class="fa fa-file-image-o"></i>Profile picture</span>
-                  <input type="file" id="myfile" class="myfile" name="myfile" accept="image/*, image/heic, image/heif" display="inline" />
-                </button>
+              <img th:if="${profilepath != null}" th:src="${'/userimg/'+profilepath}" class="img-thumbnail" alt="">
+              <img th:if="${profilepath == null}" th:src="@{/img/user.png}" class="img-thumbnail" alt="">
+<!--              <form>-->
+<!--                <button type="submit" class="btn btn-default">Upload</button>-->
+<!--                <button type="button" class="btn btn-default">-->
+<!--                  <i class="fa fa-file-image-o"></i>Profile picture</span>-->
+<!--                  <input type="file" id="myfile" class="myfile" name="myfile" accept="image/*, image/heic, image/heif" display="inline" />-->
+<!--                </button>-->
+<!--              </form>-->
+              <form method="POST" enctype="multipart/form-data" action="/user/updateProfile">
+                <table>
+                  <tr>
+                    <td><input type="file" name="file" /></td><td><input type="submit" value="Update Profile" /></td>
+                  </tr>
+                </table>
               </form>
             </div>
             <div class="col-md-8">
