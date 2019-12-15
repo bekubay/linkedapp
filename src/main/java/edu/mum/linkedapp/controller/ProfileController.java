@@ -25,8 +25,6 @@ public class ProfileController {
 
     @GetMapping("/user/profile/{username}")
     public String showUserProfile(@PathVariable("username") String username, Model model, Principal principal){
-        System.out.println(username);
-        System.out.println("username");
         model.addAttribute("user", userService.findByUsername(username).get());
         return "profile";
     }

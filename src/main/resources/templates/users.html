@@ -23,12 +23,13 @@
                     <div class="row member-row" th:each="user: ${users}">
                         <div th:if="${not #authentication.getPrincipal().getUsername().equals(user.getUsername())}">
                         <div class="col-md-3">
-                            <img th:src="@{img/user.png}" class="img-thumbnail" alt="">
+                            <img th:src="@{/img/user.png}" class="img-thumbnail" alt="">
                             <div class="text-center" th:text="${user.firstname + ' ' + user.lastname}">
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <p><a th:href="@{'/user/follow/' + ${user.getUsername()}}" class="btn btn-success btn-block"><i class="fa fa-users"></i> Follow</a></p>
+                            <p th:if="${user.getFollowers().contains(thisUser)}"><a th:href="@{'/user/unfollow/' + ${user.getUsername()}}" class="btn btn-success btn-block"><i class="fa fa-users"></i> UnFollow</a></p>
+                            <p th:if="${not user.getFollowers().contains(thisUser)}"><a th:href="@{'/user/follow/' + ${user.getUsername()}}" class="btn btn-success btn-block"><i class="fa fa-users"></i> Follow</a></p>
                         </div>
                         <div class="col-md-3" sec:authorize="hasRole('ADMIN')" >
                             <p><a th:href="@{'/user/activate/' + ${user.getUsername()}}" class="btn btn-default btn-block"><i class="fa fa-envelope"></i> Activate</a></p>

@@ -10,5 +10,9 @@ public interface IUserService {
     Optional<User> findByUsername(String username);
     List<User> findAll();
     Optional<User> findById(Long id);
+    void follow(String username, String followeeUsername);
+    List<User> findFollowers(String username);
+    List<User> findFollowing(String username);
 
+    void unfollow(String username, String followeeUsername);
 }
