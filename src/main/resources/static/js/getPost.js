@@ -20,7 +20,7 @@ $(function () {
         var itemDetail = '';
         itemDetail += '<div class="panel panel-default post" id="panel_' + postItem.id + '">';
         itemDetail += '<div class="panel-body"><div class="row"><div class="col-sm-2">';
-        itemDetail += '<a th:href="@{/user/follow/' + postItem.owner.username + '}" class="post-avatar thumbnail"><img src="' + ((postItem.owner.portrait != null && postItem.owner.portrait !== "") ? "/userimg/" + postItem.owner.portrait : "/img/user.png") + '" alt=""/><div class="text-center">'+ postItem.owner.username +'</div></a>';
+        itemDetail += '<a href="/user/follow/' + postItem.owner.username + '" class="post-avatar thumbnail"><img src="' + ((postItem.owner.portrait != null && postItem.owner.portrait !== "") ? "/userimg/" + postItem.owner.portrait : "/img/user.png") + '" alt=""/><div class="text-center">'+ postItem.owner.username +'</div></a>';
         itemDetail += '<div class="likes text-center" id="likeCount">7 Likes</div></div>';
         itemDetail += '<div class="col-sm-10"><div class="bubble"><div class="pointer"><p>';
         if (postItem.attachType == 0) {
