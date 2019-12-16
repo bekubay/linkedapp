@@ -1,6 +1,4 @@
 $(function () {
-
-
     $("#postSubmit").click(function () {
         var content = $("#postTextArea").val();
         if (content.length == 0) {
