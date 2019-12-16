@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface IPostRepository extends JpaRepository<Post, Long> {
     public List<Post> findByOwnerIs(User user);
+    public Post findPostById(Long id);
 }

@@ -44,4 +44,9 @@ public class PostService implements IPostService {
     public Post save(Post post) {
         return postDao.save(post);
     }
+
+    @Override
+    public Post getPost(Long id) {
+        return postDao.findPostById(id);
+    }
 }

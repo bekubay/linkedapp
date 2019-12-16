@@ -13,4 +13,6 @@ public interface IPostService {
     public List<Post> getAllPostsByUserId(Long userId);
 
     public Post save(Post post);
+
+    public Post getPost(Long id);
 }

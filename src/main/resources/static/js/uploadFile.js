@@ -23,5 +23,5 @@ $(function () {
         }).fail(function (xhr, status, exception) {
             alert(status, exception);
         });
-    })
+    });
 });

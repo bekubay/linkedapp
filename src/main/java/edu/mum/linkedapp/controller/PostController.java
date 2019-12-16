@@ -1,11 +1,15 @@
 package edu.mum.linkedapp.controller;
 
+import edu.mum.linkedapp.bo.CommentBO;
+import edu.mum.linkedapp.domain.Comment;
 import edu.mum.linkedapp.domain.Post;
 import edu.mum.linkedapp.domain.User;
+import edu.mum.linkedapp.service.impl.CommentService;
 import edu.mum.linkedapp.service.impl.PostService;
 import edu.mum.linkedapp.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +28,8 @@ public class PostController {
     PostService postService;
     @Autowired
     UserService userService;
+    @Autowired
+    CommentService commentService;
 
     public static final Pattern urlPattern= Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]",
             Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
@@ -76,5 +82,21 @@ public class PostController {
     public @ResponseBody List<Post> getAllPosts() {
         List<Post> allPosts = postService.getAllPosts();
         return allPosts;
+    }
+
+    @PostMapping(value = "/addComment", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Comment addComment(@RequestBody CommentBO commentBO, Model model, Principal principal) {
+        System.out.println("CommentBO: " + commentBO);
+        User user = userService.findByUsername(principal.getName()).get();
+        Post post = postService.getPost(Long.parseLong(commentBO.getPostId()));
+        Comment comment = new Comment();
+        comment.setDate(new Date());
+        comment.setContent(commentBO.getContent());
+        post.addComment(comment);
+        comment.setOwner(user);
+        comment = commentService.save(comment);
+        System.out.println("post: " + post);
+        System.out.println("comment: " + comment);
+        return comment;
     }
 }

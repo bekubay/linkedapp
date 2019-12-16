@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import edu.mum.linkedapp.domain.User;
 
@@ -46,5 +44,24 @@ public class Post implements Serializable {
 
     @OneToMany
     private Set<User> dislikedBy = new HashSet<>();
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
+
+    public boolean addComment(Comment comment) {
+        if (comments.add(comment)) {
+            comment.setPost(this);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeComment(Comment comment) {
+        if (comments.remove(comment)) {
+            comment.setPost(null);
+            return true;
+        }
+        return false;
+    }
 
 }

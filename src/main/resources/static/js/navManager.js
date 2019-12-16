@@ -5,5 +5,5 @@ $(function () {
         if (window.location.pathname.indexOf(liID)>0) {
             $(this).addClass("active");
         }
-    })
+    });
 });

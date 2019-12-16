@@ -14,11 +14,11 @@ $(function () {
         }).fail(function (xhr, status, exception) {
             alert(status, exception);
         });
-    })
+    });
 
     $.addItem = function(postItem) {
         var itemDetail = '';
-        itemDetail += '<div class="panel panel-default post" id="' + postItem.id + '">';
+        itemDetail += '<div class="panel panel-default post" id="panel_' + postItem.id + '">';
         itemDetail += '<div class="panel-body"><div class="row"><div class="col-sm-2">';
         itemDetail += '<a th:href="@{/user/follow/' + postItem.owner.username + '}" class="post-avatar thumbnail"><img src="' + ((postItem.owner.portrait != null && postItem.owner.portrait !== "") ? "/userimg/" + postItem.owner.portrait : "/img/user.png") + '" alt=""/><div class="text-center">'+ postItem.owner.username +'</div></a>';
         itemDetail += '<div class="likes text-center" id="likeCount">7 Likes</div></div>';
@@ -34,20 +34,18 @@ $(function () {
         itemDetail += '<div class="pointer-border"></div></div>';
         itemDetail += '<p class="post-actions"><a href="#">Comment</a> - <a href="#">Like</a> - <a href="#">Follow</a> - <a href="#">Share</a></p>';
         itemDetail += '<div class="comment-form">' +
-            '<form class="form-inline"><div class="form-group"><input type="text" class="form-control" placeholder="enter comment"></div>' +
-            '<button type="submit" class="btn btn-default">Add</button></form></div>';
+            '<form class="form-inline" id="form_' + postItem.id + '">' +
+            '<div class="form-group"><input id="input_text_' + postItem.id + '" type="text" class="form-control" placeholder="enter comment"></div>' +
+            '<button type="button" class="commentSubmit btn btn-default">Add</button></form></div>';
         itemDetail += '<div class="clearfix"></div>' +
-            '<div class="comments"><div class="comment">' +
-            '<a href="#" class="comment-avatar pull-left"><img th:src="@{/img/user.png}" alt=""></a><div class="comment-text">' +
-            '<p>I am just going to paste in a paragraph, then we will add another clearfix.</p></div></div>';
-        itemDetail += '<div class="clearfix"></div>' +
-            '<div class="comment">' +
-            '<a href="#" class="comment-avatar pull-left"><img th:src="@{/img/user.png}" alt=""></a><div class="comment-text">' +
-            '<p>I am just going to paste in a paragraph, then we will add another clearfix.</p></div></div>';
-        itemDetail += '<div class="clearfix"></div>';
+            '<div class="comments" id="comments_' + postItem.id + '">';
+        $.each(postItem.comments, function (index, value) {
+            itemDetail += $.addCommit(value, postItem.id);
+        });
+
         itemDetail += '</div></div></div></div></div>';
         return itemDetail;
-    }
+    };
 
     function initData() {
         $.ajax({
