@@ -12,12 +12,12 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Entity
-@Data
+//@Data
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode(exclude="followers")
+//@ToString
+//@EqualsAndHashCode(exclude="followers")
 //@SecondaryTable(name = "profile", pkJoinColumns = @PrimaryKeyJoinColumn(name = "user_id"))
 public class User implements Serializable {
     @Id
@@ -67,6 +67,7 @@ public class User implements Serializable {
 //    @NotEmpty
     private String confirm_password;
 
+    @JsonIgnore
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_network",
@@ -74,6 +75,7 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "followee_id"))
     private Set<User> following = new HashSet<>();
 
+    @JsonIgnore
     @ToString.Exclude
     @ManyToMany(mappedBy = "following",fetch = FetchType.EAGER)
     private Set<User> followers = new HashSet<>();

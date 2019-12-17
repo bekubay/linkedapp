@@ -32,7 +32,7 @@ $(function () {
             // width="320" height="240"
         }
         itemDetail += '<div class="pointer-border"></div></div>';
-        itemDetail += '<p class="post-actions"><a href="#">Comment</a> - <a href="#">Like</a> - <a href="#">Follow</a> - <a href="#">Share</a></p>';
+        itemDetail += '<p class="post-actions"><a href="#">Like</a> - <a href="#">Dislike</a> - <a href="#">Follow</a> - <a href="#">Share</a></p>';
         itemDetail += '<div class="comment-form">' +
             '<form class="form-inline" id="form_' + postItem.id + '">' +
             '<div class="form-group"><input id="input_text_' + postItem.id + '" type="text" class="form-control" placeholder="enter comment"></div>' +
