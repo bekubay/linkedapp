@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-8" layout:fragment="main_section">
                 
-                <div class="members">
+                <div class="members" sec:authorize="hasRole('USER')">
                   <form action = "/users"  class=" " method = "GET">
                     <div><input type = "text" class="" name="name" placehoder="Search User"/>
                         <input type ="submit" value = "Search" class =""/>
@@ -38,17 +38,22 @@
                             <p th:if="${user.getFollowers().contains(thisUser)}"><a th:href="@{'/user/unfollow/' + ${user.getUsername()}}" class="btn btn-success btn-block"><i class="fa fa-users"></i> UnFollow</a></p>
                             <p th:if="${not user.getFollowers().contains(thisUser)}"><a th:href="@{'/user/follow/' + ${user.getUsername()}}" class="btn btn-success btn-block"><i class="fa fa-users"></i> Follow</a></p>
                         </div>
-                        <div class="col-md-3">
-                            <p><a th:href="@{'/user/activate/' + ${user.getUsername()}}" class="btn btn-default btn-block"><i class="fa fa-envelope"></i> Activate</a></p>
+                            <div class="col-md-3" th:text="${user.getFirstname() + ' ' + user.getLastname()}">
                         </div>
                         <div class="col-md-3">
-                            <p><a th:href="@{'/user/profile/' + ${user.getUsername()}}" class="btn btn-primary btn-block"><i class="fa fa-edit"></i> View Profile</a></p>
+                            <p><a th:href="@{'/user/profile/' + ${user.getUsername()}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-eye-open"></span> View</a></p>
                         </div>
                         </div>
                     </div>
                     </div>
-                </div>
+                </div >
                 <div class="members"  sec:authorize="hasRole('ADMIN')">
+                <form action = "/users"  class=" " method = "GET">
+                    <div><input type = "text" class="" name="name" placehoder="Search User"/>
+                        <input type ="submit" value = "Search" class =""/>
+                    </div>
+                </form>
+                <h1 class="page-header" >Users</h1>
                 <table class="table table-condensed">
 <!--                    <thead>-->
 <!--                    <tr>-->
@@ -63,8 +68,8 @@
                         <td th:if="${user.getPortrait() == null}"><img th:src="@{/img/user.png}" class="img-thumbnail-small" alt=""></td>
                         <td th:text="${user.getFirstname() + ' ' + user.getLastname()}"></td>
                         <td th:text="${user.getDob()}"></td>
-                        <td th:if="${user.getActive() == 1}"><a th:href="@{'/user/deactivate/' + ${user.getUsername()}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-ok-circle"></span>Deactivate</a></td>
-                        <td th:if="${user.getActive() != 1}"><a th:href="@{'/user/activate/' + ${user.getUsername()}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-ban-circle"></span>Activate</a></td>
+                        <td th:if="${user.getActive() == 1}"><a th:href="@{'/user/deactivate/' + ${user.getUsername()}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-ban-circle"></span>Deactivate</a></td>
+                        <td th:if="${user.getActive() != 1}"><a th:href="@{'/user/activate/' + ${user.getUsername()}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-ok-circle"></span>Activate</a></td>
                         <td><a th:href="@{'/user/profile/' + ${user.getUsername()}}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span>View</a></td>
                     </tr>
                     </tbody>
@@ -91,8 +96,8 @@
                     <tr th:if="${not #authentication.getPrincipal().getUsername().equals(user.getUsername())}">
                         <td th:if="${user.getPortrait() != null}"><img th:src="${'/userimg/'+ user.getPortrait()}" class="img-thumbnail-small" alt=""></td>
                         <td th:if="${user.getPortrait() == null}"><img th:src="@{/img/user.png}" class="img-thumbnail-small" alt=""></td>
-                        <td th:if="${user.getActive()}"><a th:href="@{'/user/deactivate/' + ${user.getUsername()}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-ok-circle"></span>  Deactivate</a></td>
-                        <td th:if="${!user.getActive()}"><a th:href="@{'/user/activate/' + ${user.getUsername()}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-ban-circle"></span>  Activate</a></td>
+                        <td th:if="${user.getActive()}"><a th:href="@{'/user/deactivate/' + ${user.getUsername()}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-ban-circle"></span>  Deactivate</a></td>
+                        <td th:if="${!user.getActive()}"><a th:href="@{'/user/activate/' + ${user.getUsername()}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-ok-circle"></span>  Activate</a></td>
                         <td><a th:href="@{'/user/profile/' + ${user.getUsername()}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-eye-open"></span> View</a></td>
                     </tr>
                     </tbody>
