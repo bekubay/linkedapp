@@ -88,6 +88,16 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public void deactivate(String username) {
+        User user = userRepository.findByUsername(username).get();
+        user.setActive(0);
+        userRepository.save(user);
+    }
+    @Override
+    public void activate(String username) {
+        User user = userRepository.findByUsername(username).get();
+        user.setActive(1);
+        userRepository.save(user);
     public List<User> findByNameLike(String name){
         return userRepository.findByNameLike(name);
     }
