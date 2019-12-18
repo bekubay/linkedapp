@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AdvertController {
-    @GetMapping("/admin/adverts")
+    @GetMapping("/advert/adverts")
     public String advertsAdminPage(){
         return "adverts_admin";
     }
