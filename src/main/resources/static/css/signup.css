@@ -8,6 +8,7 @@
 }
 .form-control, .btn {
     border-radius: 20px;
+    border-radius: 20px;
     outline: none !important;
 }
 .signup-form {
