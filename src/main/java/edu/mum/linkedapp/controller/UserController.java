@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.naming.Binding;
 import javax.validation.Valid;
+import javax.xml.bind.SchemaOutputResolver;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -102,4 +103,11 @@ public class UserController {
         return "redirect:/user/users";
     }
 
+    @GetMapping("/users")
+    public String listUsers(Model model,@RequestParam(defaultValue = "") String name) {
+        System.out.println(name);
+        model.addAttribute("users", userService.findByNameLike(name));
+        System.out.println(userService.findByNameLike(name).size());
+        return "users";
+    }
 }

@@ -99,4 +99,8 @@ public class UserService implements IUserService {
         user.setActive(1);
         userRepository.save(user);
     }
+    @Override
+    public List<User> findByNameLike(String name){
+        return userRepository.findByNameLike(name);
+    }
 }

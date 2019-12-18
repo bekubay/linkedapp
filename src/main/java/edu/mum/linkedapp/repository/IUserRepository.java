@@ -14,4 +14,6 @@ public interface IUserRepository extends JpaRepository<User, Long> {
     @Query("Select f from User u join u.following f where u.username =:username")
     List<User> findFollowing(@Param("username") String username);
     Optional<User> findByUsername(String username);
+    @Query("select u from User u where u.username like %:name% or u.firstname like %:name% or u.lastname like %:name%")
+    List<User> findByNameLike(String name);
 }
