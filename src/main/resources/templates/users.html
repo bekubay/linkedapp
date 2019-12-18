@@ -17,6 +17,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8" layout:fragment="main_section">
+                <form action = "/users"  class=" " method = "GET">
+                    <div><input type = "text" class="" name="name" placehoder="Search User"/>
+                        <input type ="submit" value = "Search" class =""/>
+                    </div>
+                  </form>
                 <div class="members">
                     <h1 class="page-header" >Users</h1>
                     <div th:if="${not #lists.isEmpty(users)}">
