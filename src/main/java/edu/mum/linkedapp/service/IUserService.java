@@ -17,4 +17,6 @@ public interface IUserService {
     void unfollow(String username, String followeeUsername);
 
     void updateProfilePicture(String username,String url);
+
+    List<User> findByNameLike(String name);
 }

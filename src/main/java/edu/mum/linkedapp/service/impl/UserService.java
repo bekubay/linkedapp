@@ -86,4 +86,9 @@ public class UserService implements IUserService {
         user.setPortrait(url);
         userRepository.save(user);
     }
+
+    @Override
+    public List<User> findByNameLike(String name){
+        return userRepository.findByNameLike(name);
+    }
 }
