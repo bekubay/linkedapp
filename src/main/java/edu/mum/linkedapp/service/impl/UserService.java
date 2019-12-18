@@ -98,5 +98,7 @@ public class UserService implements IUserService {
         User user = userRepository.findByUsername(username).get();
         user.setActive(1);
         userRepository.save(user);
+    public List<User> findByNameLike(String name){
+        return userRepository.findByNameLike(name);
     }
 }
