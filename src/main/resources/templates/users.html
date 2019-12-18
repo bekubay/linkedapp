@@ -12,14 +12,17 @@
 </head>
 
 <body>
-
 <section>
     <div class="container">
         <div class="row">
             <div class="col-md-8" layout:fragment="main_section">
-                <div class="members">
+                <div class="members" sec:authorize="hasRole('USER')">
+<!--                    <span th:text="${#authentication.getPrincipal().getAuthorities().get(0).getClass().getName() != org.springframework.security.core.authority.SimpleGrantedAuthority('ROLE_ADMIN')}">:</span><span th:text="${#authentication.getPrincipal().getAuthorities().get(0) == 'ROLE_ADMIN'}"></span>-->
+<!--                    <span>ROLE_USER:</span><span th:text="${#authentication.getPrincipal().getAuthorities().get(0) == 'ROLE_USER'}"></span>-->
                     <h1 class="page-header" >Users</h1>
+<!--                    <span th:text="${#authentication.getPrincipal().getAuthorities().get(0) != 'ROLE_USER'}">NOT FOUND2</span>-->
                     <div th:if="${not #lists.isEmpty(users)}">
+
                     <div class="row member-row" th:each="user: ${users}">
                         <div th:if="${not #authentication.getPrincipal().getUsername().equals(user.getUsername())}">
                         <div class="col-md-3">
@@ -31,7 +34,7 @@
                             <p th:if="${user.getFollowers().contains(thisUser)}"><a th:href="@{'/user/unfollow/' + ${user.getUsername()}}" class="btn btn-success btn-block"><i class="fa fa-users"></i> UnFollow</a></p>
                             <p th:if="${not user.getFollowers().contains(thisUser)}"><a th:href="@{'/user/follow/' + ${user.getUsername()}}" class="btn btn-success btn-block"><i class="fa fa-users"></i> Follow</a></p>
                         </div>
-                        <div class="col-md-3" sec:authorize="hasRole('ADMIN')" >
+                        <div class="col-md-3">
                             <p><a th:href="@{'/user/activate/' + ${user.getUsername()}}" class="btn btn-default btn-block"><i class="fa fa-envelope"></i> Activate</a></p>
                         </div>
                         <div class="col-md-3">
@@ -41,6 +44,80 @@
                     </div>
                     </div>
                 </div>
+                <div class="members"  sec:authorize="hasRole('ADMIN')">
+                <table class="table table-condensed">
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                        <th>Portrait</th>-->
+<!--                        <th><a href="#" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-ban-circle"></span>Deactivate</a>||<a href="#" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-ok-circle"></span>Activate</a></th>-->
+<!--                        <th><a href="#" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span> View</a></th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+                    <tbody th:each="user: ${users}">
+                    <tr th:if="${not #authentication.getPrincipal().getUsername().equals(user.getUsername())}">
+                        <td th:if="${user.getPortrait() != null}"><img th:src="${'/userimg/'+ user.getPortrait()}" class="img-thumbnail-small" alt=""></td>
+                        <td th:if="${user.getPortrait() == null}"><img th:src="@{/img/user.png}" class="img-thumbnail-small" alt=""></td>
+                        <td th:text="${user.getFirstname() + ' ' + user.getLastname()}"></td>
+                        <td th:text="${user.getDob()}"></td>
+                        <td th:if="${user.getActive() == 1}"><a th:href="@{'/user/deactivate/' + ${user.getUsername()}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-ok-circle"></span>Deactivate</a></td>
+                        <td th:if="${user.getActive() != 1}"><a th:href="@{'/user/activate/' + ${user.getUsername()}}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-ban-circle"></span>Activate</a></td>
+                        <td><a th:href="@{'/user/profile/' + ${user.getUsername()}}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span>View</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8" layout:fragment="main_section" th:if="${not #lists.isEmpty(users)}">
+
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Portrait</th>
+                        <th><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-ok-circle"></span>||<span class="glyphicon glyphicon-ok-circle"></span></a></th>
+                        <th><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-eye-open"></span> View</a></th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="user: ${users}">
+                    <tr th:if="${not #authentication.getPrincipal().getUsername().equals(user.getUsername())}">
+                        <td th:if="${user.getPortrait() != null}"><img th:src="${'/userimg/'+ user.getPortrait()}" class="img-thumbnail-small" alt=""></td>
+                        <td th:if="${user.getPortrait() == null}"><img th:src="@{/img/user.png}" class="img-thumbnail-small" alt=""></td>
+                        <td th:if="${user.getActive()}"><a th:href="@{'/user/deactivate/' + ${user.getUsername()}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-ok-circle"></span>  Deactivate</a></td>
+                        <td th:if="${!user.getActive()}"><a th:href="@{'/user/activate/' + ${user.getUsername()}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-ban-circle"></span>  Activate</a></td>
+                        <td><a th:href="@{'/user/profile/' + ${user.getUsername()}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-eye-open"></span> View</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+<!--                    <div class="members">-->
+<!--                        <h1 class="page-header" >Users</h1>-->
+<!--                        <div th:if="${not #lists.isEmpty(users)}">-->
+<!--                            <div class="row member-row" th:each="user: ${users}">-->
+<!--                                <div th:if="${not #authentication.getPrincipal().getUsername().equals(user.getUsername())}">-->
+<!--                                    <div class="col-md-3">-->
+<!--                                        <img th:src="@{/img/user.png}" class="img-thumbnail" alt="">-->
+<!--                                        <div class="text-center" th:text="${user.firstname + ' ' + user.lastname}">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-3">-->
+<!--                                        <p th:if="${user.getFollowers().contains(thisUser)}"><a th:href="@{'/user/unfollow/' + ${user.getUsername()}}" class="btn btn-success btn-block"><i class="fa fa-users"></i> UnFollow</a></p>-->
+<!--                                        <p th:if="${not user.getFollowers().contains(thisUser)}"><a th:href="@{'/user/follow/' + ${user.getUsername()}}" class="btn btn-success btn-block"><i class="fa fa-users"></i> Follow</a></p>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-3">-->
+<!--                                        <p><a th:href="@{'/user/activate/' + ${user.getUsername()}}" class="btn btn-default btn-block"><i class="fa fa-envelope"></i> Activate</a></p>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-3">-->
+<!--                                        <p><a th:href="@{'/user/profile/' + ${user.getUsername()}}" class="btn btn-primary btn-block"><i class="fa fa-edit"></i> View Profile</a></p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
             </div>
         </div>
     </div>

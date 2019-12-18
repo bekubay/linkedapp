@@ -82,13 +82,23 @@ public class UserController {
         return "users";
     }
     @GetMapping("/user/follow/{username}")
-    public String showUserFollow(@PathVariable("username") String username, Model model, Principal principal){
+    public String showUserFollow(@PathVariable("username") String username, Principal principal){
         userService.follow(principal.getName(),username);
         return "redirect:/user/users";
     }
     @GetMapping("/user/unfollow/{username}")
-    public String showUserUnfollow(@PathVariable("username") String username, Model model, Principal principal){
+    public String showUserUnfollow(@PathVariable("username") String username, Principal principal){
         userService.unfollow(principal.getName(),username);
+        return "redirect:/user/users";
+    }
+    @GetMapping("/user/deactivate/{username}")
+    public String deactivateUser(@PathVariable("username") String username){
+        userService.deactivate(username);
+        return "redirect:/user/users";
+    }
+    @GetMapping("/user/activate/{username}")
+    public String activateUser(@PathVariable("username") String username){
+        userService.activate(username);
         return "redirect:/user/users";
     }
 
