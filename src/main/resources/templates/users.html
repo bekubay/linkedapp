@@ -37,7 +37,7 @@
                             <div class="col-md-4" th:text="${user.getFirstname() + ' ' + user.getLastname()}">
                             </div>
                         <div class="col-md-2">
-                            <span th:if="${user.getFollowers().contains(thisUser)}"><a th:href="@{'/user/unfollow/' + ${user.getUsername()}}" class="btn btn-success btn-block"><i class="fa fa-users" th:text="#{users.page.unfollow}" ></i> </a></span>
+                            <span th:if="${user.getFollowers().contains(thisUser)}"><a th:href="@{'/user/unfollow/' + ${user.getUsername()}}" class="btn btn-danger btn-block"><i class="fa fa-users" th:text="#{users.page.unfollow}" ></i> </a></span>
                             <span th:if="${not user.getFollowers().contains(thisUser)}"><a th:href="@{'/user/follow/' + ${user.getUsername()}}" class="btn btn-success btn-block"><i class="fa fa-users" th:text="#{users.page.follow}" ></i> </a></span>
                         </div>
                         <div class="col-md-2">
