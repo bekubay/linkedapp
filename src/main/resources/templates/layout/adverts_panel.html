@@ -14,7 +14,7 @@
         <div class="col-md-4"  th:fragment="adverts_panel">
             <div class="panel panel-default adverts">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Adverts</h3>
+                                <h3 class="panel-title" th:text="#{advert.page.advert}"></h3>
                             </div>
                             <div class="panel-body"  th:each="advert: ${adverts}">
                                 <div class="group-item">
@@ -23,6 +23,19 @@
                                     You can visit the advertiser website at: <span th:text="${advert.getUrl()}"></span>
                                 </div>
                                 <div class="clearfix"></div>
+                                <div class="group-item">
+                                    <img th:src="@{/img/advert.png}" alt="">
+                                    <h4><a href="#" class="">Sample Advert Two</a></h4>
+                                    <p>This is a paragraph of intro text, or whatever I want to call it.</p>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="group-item">
+                                    <img th:src="@{/img/advert.png}" alt="">
+                                    <h4><a href="#" class="">Sample Advert Three</a></h4>
+                                    <p>This is a paragraph of intro text, or whatever I want to call it.</p>
+                                </div>
+                                <div class="clearfix"></div>
+                                <a href="#" class="btn btn-primary"th:text="#{advert.page.viewall}" >View All Adverts</a>
 <!--                                <div class="group-item">-->
 <!--                                    <img th:src="@{/img/advert.png}" alt="">-->
 <!--                                    <h4><a href="#" class="">Sample Advert Two</a></h4>-->
