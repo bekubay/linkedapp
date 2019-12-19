@@ -41,6 +41,17 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public List<Post> getAllFollowersPostByUserId(Long userId) {
+        Optional<User> op = userDao.findById(userId);
+        User user = null;
+        if (op.isPresent()) {
+            user = op.get();
+            return postDao.findAllByUserWithFollowers(user.getId(), user.getId());
+        }
+        return new ArrayList<Post>();
+    }
+
+    @Override
     public Post save(Post post) {
         return postDao.save(post);
     }

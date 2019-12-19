@@ -92,6 +92,16 @@ public class PostController {
         return postBO;
     }
 
+    @GetMapping("/allFollowersPosts")
+    public @ResponseBody PostBO getAllFollowsPosts(Principal principal) {
+        User user = userService.findByUsername(principal.getName()).get();
+        List<Post> allPosts = postService.getAllFollowersPostByUserId(user.getId());
+        PostBO postBO = new PostBO();
+        postBO.setUser(user);
+        postBO.getPostList().addAll(allPosts);
+        return postBO;
+    }
+
     @PostMapping(value = "/addComment", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Comment addComment(@RequestBody CommentBO commentBO, Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName()).get();

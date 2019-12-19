@@ -12,6 +12,8 @@ public interface IPostService {
 
     public List<Post> getAllPostsByUserId(Long userId);
 
+    public List<Post> getAllFollowersPostByUserId(Long userId);
+
     public Post save(Post post);
 
     public Post getPost(Long id);

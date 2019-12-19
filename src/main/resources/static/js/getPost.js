@@ -61,7 +61,7 @@ $(function () {
         $.ajax({
             type: 'GET',
             dataType: "json",
-            url: "/user/allPosts"
+            url: "/user/allFollowersPosts" // "/user/allPosts"
         }).done(function (data) {
             $.each(data.postList, function (index, value) {
                 $("#postList").prepend($.addItem(value, data.user));
