@@ -17,7 +17,7 @@ $(function () {
     });
 
     $.addItem = function(postItem, user) {
-        if (postItem.unhealth_info == false) {
+        if (postItem.unhealth_info == true) {
             return "";
         }
         var itemDetail = '';
