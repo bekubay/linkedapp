@@ -1,5 +1,6 @@
 package edu.mum.linkedapp.service;
 
+import edu.mum.linkedapp.domain.Advert;
 import edu.mum.linkedapp.domain.User;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface IUserService {
 
     void activate(String username);
     List<User> findByNameLike(String name);
+
+    List<Advert> selectRandomAdverts();
 }

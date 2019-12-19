@@ -5,6 +5,11 @@
 <head>
     <meta charset="utf-8">
     <title th:text ="#{index.page.title}"></title>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}"/>
     <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"/>
@@ -58,7 +63,7 @@
             <hr>
             <p class="hint-text"th:text="#{index.signup.use-social-media}"></p>
             <div class="social-btn text-center">
-                <a href="#" class="btn btn-primary btn-lg"><i class="fa fa-facebook"></i> Facebook</a>
+                <a th:href="@{/login}" class="btn btn-primary btn-lg"><i class="fa fa-facebook"></i> Facebook</a>
                 <a href="#" class="btn btn-danger btn-lg"><i class="fa fa-google"></i> Google</a>
             </div>
 
