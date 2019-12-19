@@ -64,4 +64,18 @@ public class Post implements Serializable {
         return false;
     }
 
+    public boolean addLikedBy(User user) {
+        if (likedBy.add(user)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeLikedBy(User user) {
+        if (likedBy.remove(user)) {
+            return true;
+        }
+        return false;
+    }
+
 }

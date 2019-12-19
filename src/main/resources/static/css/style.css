@@ -173,3 +173,23 @@ footer{
     width:100%;
     margin:auto;
 }
+
+.right {
+    text-align: right;
+    margin-bottom: 4px;
+    margin-right: 12px;
+    width: auto;
+    background-color: #ffffff;
+}
+
+.post-thumbnail {
+    margin-bottom: 0px;
+}
+
+.datePosition {
+    margin-top: 5px;
+}
+
+.date {
+    color: #aaaaaa;
+}

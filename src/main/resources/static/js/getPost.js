@@ -10,18 +10,28 @@ $(function () {
             contentType:'application/json;charset=utf-8'
         }).done(function (data) {
             $("#postTextArea").val("");
-            $("#postList").prepend($.addItem(data));
+            $("#postList").prepend($.addItem(data.postList[0], data.user));
         }).fail(function (xhr, status, exception) {
             alert(status, exception);
         });
     });
 
-    $.addItem = function(postItem) {
+    $.addItem = function(postItem, user) {
         var itemDetail = '';
+        var hasLiked = "like";
+        var hasLikedClass = "";
+        if (postItem.likedBy.length > 0) {
+            $.each(postItem.likedBy, function (i, item) {
+                if (item.username === user.username) {
+                    hasLiked = "unlike";
+                    hasLikedClass = " heartAnimation";
+                }
+            });
+        }
         itemDetail += '<div class="panel panel-default post" id="panel_' + postItem.id + '">';
         itemDetail += '<div class="panel-body"><div class="row"><div class="col-sm-2">';
-        itemDetail += '<a href="/user/follow/' + postItem.owner.username + '" class="post-avatar thumbnail"><img src="' + ((postItem.owner.portrait != null && postItem.owner.portrait !== "") ? "/userimg/" + postItem.owner.portrait : "/img/user.png") + '" alt=""/><div class="text-center">'+ postItem.owner.username +'</div></a>';
-        itemDetail += '<div class="likes text-center" id="likeCount">7 Likes</div></div>';
+        itemDetail += '<a href="/user/profile/' + postItem.owner.username + '" class="post-avatar thumbnail post-thumbnail"><img src="' + ((postItem.owner.portrait != null && postItem.owner.portrait !== "") ? "/userimg/" + postItem.owner.portrait : "/img/user.png") + '" alt=""/><div class="text-center">'+ postItem.owner.username +'</div></a>';
+        itemDetail += '<div class="likes text-center datePosition" id="likeCount"><span class="date">' + DateFormat.format.prettyDate(postItem.date) + '</span></div></div>';
         itemDetail += '<div class="col-sm-10"><div class="bubble"><div class="pointer"><p>';
         if (postItem.attachType == 0) {
             itemDetail += postItem.text + '</p></div>';
@@ -32,7 +42,7 @@ $(function () {
             // width="320" height="240"
         }
         itemDetail += '<div class="pointer-border"></div></div>';
-        itemDetail += '<p class="post-actions"><a href="#">Like</a> - <a href="#">Dislike</a> - <a href="#">Follow</a> - <a href="#">Share</a></p>';
+        itemDetail += '<p class="post-actions"><div class="heart' + hasLikedClass + '" id="like_' + postItem.id + '" rel="'+ hasLiked +'"></div><div class="likeCount" id="likeCount' + postItem.id + '">' + postItem.likedBy.length + '</div></p>';
         itemDetail += '<div class="comment-form">' +
             '<form class="form-inline" id="form_' + postItem.id + '">' +
             '<div class="form-group"><input id="input_text_' + postItem.id + '" type="text" class="form-control" placeholder="enter comment"></div>' +
@@ -53,8 +63,8 @@ $(function () {
             dataType: "json",
             url: "/user/allPosts"
         }).done(function (data) {
-            $.each(data, function (index, value) {
-                $("#postList").prepend($.addItem(value));
+            $.each(data.postList, function (index, value) {
+                $("#postList").prepend($.addItem(value, data.user));
             });
         }).fail(function (xhr, status, exception) {
             alert(status, exception);
