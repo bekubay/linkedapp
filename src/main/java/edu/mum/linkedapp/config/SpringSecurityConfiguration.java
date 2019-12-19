@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-//@EnableOAuth2Sso
+@EnableOAuth2Sso
 @EnableWebSecurity
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -34,7 +34,11 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/advert/**").hasAnyRole("ADMIN","MARKETING")
                 .antMatchers("/user/**").hasAnyRole("USER","MARKETING","ADMIN")
                 .antMatchers("/", "/login", "/webjars/**", "/error**").permitAll()
-                .and().formLogin().loginPage("/login").defaultSuccessUrl("/user/home").and()
+             .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/user/home")
+              .and()
                 .logout()
                 .logoutUrl("/user/logout") //change default /logout url to /perform_logout
                 .logoutSuccessUrl("/login?logout=true")
@@ -43,11 +47,13 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .exceptionHandling()
-                .accessDeniedPage("/denied");;
+                .accessDeniedPage("/denied");
+
 
         //Those two settings below is to enable access h2 database via browser
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+            http.csrf().disable();
+            http.headers().frameOptions().disable();
+
 
     }
 
