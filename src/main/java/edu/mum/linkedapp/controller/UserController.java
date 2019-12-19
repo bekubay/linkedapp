@@ -65,6 +65,7 @@ public class UserController {
     public String followers(Model model, Principal principal) {
         model.addAttribute("users", userService.findFollowers(principal.getName()));
         model.addAttribute("thisUser", userService.findByUsername(principal.getName()).get());
+        model.addAttribute("adverts",userService.selectRandomAdverts());
         return "followers";
     }
 
@@ -72,6 +73,7 @@ public class UserController {
     public String following(Model model, Principal principal){
         model.addAttribute("users", userService.findFollowing(principal.getName()));
         model.addAttribute("thisUser", userService.findByUsername(principal.getName()).get());
+        model.addAttribute("adverts",userService.selectRandomAdverts());
         return "following";
     }
 
@@ -80,6 +82,7 @@ public class UserController {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         model.addAttribute("thisUser", userService.findByUsername(principal.getName()).get());
+        model.addAttribute("adverts",userService.selectRandomAdverts());
         return "users";
     }
     @GetMapping("/user/follow/{username}")
