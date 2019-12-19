@@ -36,19 +36,19 @@
               <form method="POST" enctype="multipart/form-data" action="/user/updateProfile">
                 <table>
                   <tr>
-                    <td><input type="file" name="file" /></td><td><input type="submit" value="Update Profile" /></td>
+                    <td><input type="file" name="file" /></td><td><input type="submit"  th:value="#{profile.page.update}"/></td>
                   </tr>
                 </table>
               </form>
             </div>
             <div class="col-md-8">
               <ul>
-                <li><strong>Name: </strong><span th:text = "  ${user.firstname +' ' + user.lastname}"></span></li> <br>
-                <li><strong>Email: </strong><span th:text = "  ${user.email}"></span></li><br>
+                <li><strong th:text="#{profile.page.name}"> </strong><span th:text = "  ${user.firstname +' ' + user.lastname}"></span></li> <br>
+                <li><strong th:text="#{profile.page.email}"> </strong><span th:text = "  ${user.email}"></span></li><br>
 <!--                <li><strong>City:</strong><span th:text #{user.city}></span></li>-->
 <!--                <li><strong>State:</strong><span th:text #{user.state}></span></li>-->
 <!--                <li><strong>Gender:</strong><span th:text #{user.gender}></span></li>-->
-                <li><strong>DOB: </strong><span th:text = "  ${user.dob}"></span></li>
+                <li><strong th:text="#{profile.page.dob}"> </strong><span th:text = "  ${user.dob}"></span></li>
               </ul>
             </div>
           </div><br><br>
@@ -56,7 +56,7 @@
             <div class="col-md-12">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Profile Wall</h3>
+                  <h3 class="panel-title" th:text="#{profile.page.profile}"></h3>
                 </div>
                 <div class="panel-body">
 <!--                  <form id="uploadPost" name="uploadPost" method="POST" target="/user/submitPost" >-->

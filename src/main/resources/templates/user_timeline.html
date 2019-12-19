@@ -22,18 +22,18 @@
             <div class="col-md-8"  layout:fragment="main_section">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Wall</h3>
+                        <h3 class="panel-title"  th:text="#{user_timeline.page.wall}"></h3>
                     </div>
                     <div class="panel-body">
                         <form id="uploadPost" name="uploadPost" method="POST" target="/user/submitPost" >
                             <div class="form-group">
                                 <textarea id="postTextArea" class="form-control" placeholder="Write on the wall"></textarea>
                             </div>
-                            <button id="postSubmit" type="button" class="btn btn-default">Submit</button>
+                            <button id="postSubmit" type="button" class="btn btn-default" th:text="#{user_timeline.page.submit}"></button>
                             <div class="pull-right">
                                 <div class="btn-toolbar">
                                     <button type="button" class="btn btn-default">
-                                        <i class="fa fa-file-image-o"></i>Image / <i class="fa fa-file-video-o"></i>Video</span>
+                                        <span th:text="#{user_timeline.page.image}"><i class="fa fa-file-image-o"></i></span> / <i class="fa fa-file-video-o">Vidoe</i>
                                         <input type="file" id="myfile" class="myfile" name="myfile" accept="video/*,  video/x-m4v, video/webm, video/x-ms-wmv, video/x-msvideo, video/3gpp, video/flv, video/x-flv, video/mp4, video/quicktime, video/mpeg, video/ogv, .ts, .mkv, image/*, image/heic, image/heif" display="inline" />
                                     </button>
 <!--                                    <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>-->
