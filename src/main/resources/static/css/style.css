@@ -193,3 +193,13 @@ footer{
 .date {
     color: #aaaaaa;
 }
+
+.img-thumbnail{
+    height:185px;
+    width:185px;
+}
+
+.img-thumbnail-small{
+    height: 50px;
+    width: 50px;
+}

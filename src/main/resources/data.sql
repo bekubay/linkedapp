@@ -1,28 +1,72 @@
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user1', 'pass1', 'Brhane', 'Bahrishum','bteka@mum.edu','1990-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user2', 'pass2', 'Ekubay', 'Tafere','etafere@mum.edu','1999-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user3', 'pass3', 'Girmay', 'Haile','ghaile@mum.edu','1995-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user4', 'pass4', 'Jipeng', 'Xao','jxao@mum.edu','1996-11-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active)values(null,'user5', 'pass5', 'Alula', 'Halefom','bteka@mum.edu','1990-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user6', 'pass1', 'Brhane', 'Bahrishum','bteka@mum.edu','1990-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user7', 'pass2', 'Ekubay', 'Tafere','etafere@mum.edu','1999-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user8', 'pass3', 'Girmay', 'Haile','ghaile@mum.edu','1995-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user9', 'pass4', 'Jipeng', 'Xao','jxao@mum.edu','1996-11-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user10', 'pass5', 'Alula', 'Halefom','bteka@mum.edu','1990-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user11', 'pass1', 'Brhane', 'Bahrishum','bteka@mum.edu','1990-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user12', 'pass2', 'Ekubay', 'Tafere','etafere@mum.edu','1999-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user13', 'pass3', 'Girmay', 'Haile','ghaile@mum.edu','1995-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user14', 'pass4', 'Jipeng', 'Xao','jxao@mum.edu','1996-11-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user15', 'pass5', 'Alula', 'Halefom','bteka@mum.edu','1990-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user16', 'pass1', 'Brhane', 'Bahrishum','bteka@mum.edu','1990-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user17', 'pass2', 'Ekubay', 'Tafere','etafere@mum.edu','1999-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user18', 'pass3', 'Girmay', 'Haile','ghaile@mum.edu','1995-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user19', 'pass4', 'Jipeng', 'Xao','jxao@mum.edu','1996-11-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'user20', 'pass5', 'Alula', 'Halefom','bteka@mum.edu','1990-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'adm1', 'pass1', 'Haben', 'Haile','etafere@mum.edu','1999-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'adm2', 'pass2', 'Teklay', 'Tadele','ghaile@mum.edu','1995-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'adm3', 'pass3', 'Tewelde', 'Shushay','jxao@mum.edu','1996-11-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'adm4', 'pass1', 'Haben', 'Haile','etafere@mum.edu','1999-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'adm5', 'pass2', 'Teklay', 'Tadele','ghaile@mum.edu','1995-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'adm6', 'pass3', 'Tewelde', 'Shushay','jxao@mum.edu','1996-11-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'mrk1', 'pass1', 'Haben', 'Haile','etafere@mum.edu','1999-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'mrk2', 'pass2', 'Teklay', 'Tadele','ghaile@mum.edu','1995-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'mrk3', 'pass3', 'Tewelde', 'Shushay','jxao@mum.edu','1996-11-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'mrk4', 'pass1', 'Haben', 'Haile','etafere@mum.edu','1999-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'mrk5', 'pass2', 'Teklay', 'Tadele','ghaile@mum.edu','1995-10-10',1);
+insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active) values(null,'mrk6', 'pass3', 'Tewelde', 'Shushay','jxao@mum.edu','1996-11-10',1);
+
+
 INSERT INTO linkedapp.ROLE(role_id, role) VALUES (1, 'ROLE_USER');
 INSERT INTO linkedapp.ROLE(role_id, role) VALUES (2, 'ROLE_ADMIN');
-
-insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active)
-values(null,'user1', 'pass1', 'Brhane', 'Bahrishum','bteka@mum.edu','1990-10-10',1);
-insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active)
-values(null,'user2', 'pass2', 'Ekubay', 'Tafere','etafere@mum.edu','1999-10-10',1);
-insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active)
-values(null,'user3', 'pass3', 'Girmay', 'Haile','ghaile@mum.edu','1995-10-10',1);
-insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active)
-values(null,'user4', 'pass4', 'Jipeng', 'Xao','jxao@mum.edu','1996-11-10',1);
-insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active)
-values(null,'user5', 'pass5', 'Alula', 'Halefom','bteka@mum.edu','1990-10-10',1);
-insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active)
-values(null,'adm1', 'pass1', 'Haben', 'Haile','etafere@mum.edu','1999-10-10',1);
-insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active)
-values(null,'adm2', 'pass2', 'Teklay', 'Tadele','ghaile@mum.edu','1995-10-10',1);
-insert into linkedapp.user(id, username, password, firstname, lastname, email, dob,active)
-values(null,'adm3', 'pass3', 'Tewelde', 'Shushay','jxao@mum.edu','1996-11-10',1);
+INSERT INTO linkedapp.ROLE(role_id, role) VALUES (3, 'ROLE_MARKETING');
 
 insert into linkedapp.user_role(user_id, role_id) values (1, 1);
 insert into linkedapp.user_role(user_id, role_id) values (2, 1);
 insert into linkedapp.user_role(user_id, role_id) values (3, 1);
 insert into linkedapp.user_role(user_id, role_id) values (4, 1);
 insert into linkedapp.user_role(user_id, role_id) values (5, 1);
-insert into linkedapp.user_role(user_id, role_id) values (6, 2);
-insert into linkedapp.user_role(user_id, role_id) values (7, 2);
-insert into linkedapp.user_role(user_id, role_id) values (8, 2);
+insert into linkedapp.user_role(user_id, role_id) values (6, 1);
+insert into linkedapp.user_role(user_id, role_id) values (7, 1);
+insert into linkedapp.user_role(user_id, role_id) values (8, 1);
+insert into linkedapp.user_role(user_id, role_id) values (9, 1);
+insert into linkedapp.user_role(user_id, role_id) values (10, 1);
+insert into linkedapp.user_role(user_id, role_id) values (11, 1);
+insert into linkedapp.user_role(user_id, role_id) values (12, 1);
+insert into linkedapp.user_role(user_id, role_id) values (13, 1);
+insert into linkedapp.user_role(user_id, role_id) values (14, 1);
+insert into linkedapp.user_role(user_id, role_id) values (15, 1);
+insert into linkedapp.user_role(user_id, role_id) values (16, 1);
+insert into linkedapp.user_role(user_id, role_id) values (17, 1);
+insert into linkedapp.user_role(user_id, role_id) values (18, 1);
+insert into linkedapp.user_role(user_id, role_id) values (19, 1);
+insert into linkedapp.user_role(user_id, role_id) values (20, 1);
+
+insert into linkedapp.user_role(user_id, role_id) values (21, 2);
+insert into linkedapp.user_role(user_id, role_id) values (22, 2);
+insert into linkedapp.user_role(user_id, role_id) values (23, 2);
+insert into linkedapp.user_role(user_id, role_id) values (24, 2);
+insert into linkedapp.user_role(user_id, role_id) values (25, 2);
+insert into linkedapp.user_role(user_id, role_id) values (26, 2);
+
+insert into linkedapp.user_role(user_id, role_id) values (27, 3);
+insert into linkedapp.user_role(user_id, role_id) values (28, 3);
+insert into linkedapp.user_role(user_id, role_id) values (29, 3);
+insert into linkedapp.user_role(user_id, role_id) values (30, 3);
+insert into linkedapp.user_role(user_id, role_id) values (31, 3);
+insert into linkedapp.user_role(user_id, role_id) values (32, 3);

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.naming.Binding;
 import javax.validation.Valid;
+import javax.xml.bind.SchemaOutputResolver;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -82,14 +83,31 @@ public class UserController {
         return "users";
     }
     @GetMapping("/user/follow/{username}")
-    public String showUserFollow(@PathVariable("username") String username, Model model, Principal principal){
+    public String showUserFollow(@PathVariable("username") String username, Principal principal){
         userService.follow(principal.getName(),username);
         return "redirect:/user/users";
     }
     @GetMapping("/user/unfollow/{username}")
-    public String showUserUnfollow(@PathVariable("username") String username, Model model, Principal principal){
+    public String showUserUnfollow(@PathVariable("username") String username, Principal principal){
         userService.unfollow(principal.getName(),username);
         return "redirect:/user/users";
     }
+    @GetMapping("/user/deactivate/{username}")
+    public String deactivateUser(@PathVariable("username") String username){
+        userService.deactivate(username);
+        return "redirect:/user/users";
+    }
+    @GetMapping("/user/activate/{username}")
+    public String activateUser(@PathVariable("username") String username){
+        userService.activate(username);
+        return "redirect:/user/users";
+    }
 
+    @GetMapping("/users")
+    public String listUsers(Model model,@RequestParam(defaultValue = "") String name) {
+        System.out.println(name);
+        model.addAttribute("users", userService.findByNameLike(name));
+        System.out.println(userService.findByNameLike(name).size());
+        return "users";
+    }
 }
