@@ -1,6 +1,7 @@
 package edu.mum.linkedapp.service;
 
 import edu.mum.linkedapp.domain.Post;
+import edu.mum.linkedapp.domain.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,4 +18,6 @@ public interface IPostService {
     public Post save(Post post);
 
     public Post getPost(Long id);
+
+    public Integer checkUnhealthCountWith(Long userId);
 }

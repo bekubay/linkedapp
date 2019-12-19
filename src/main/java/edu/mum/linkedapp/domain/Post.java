@@ -44,7 +44,7 @@ public class Post implements Serializable {
     * default is false, not unhealth info
     * */
     @Column(columnDefinition = "tinyint(1) default 0")
-    private boolean unhealth_info;
+    private boolean unhealth;
 
     @OneToMany
     private Set<User> likedBy = new HashSet<>();

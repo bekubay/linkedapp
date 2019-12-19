@@ -68,14 +68,20 @@ public class PostController {
         post.setAttachType(attachType);
         post.setOwner(user);
         post.setText(addPostBO.getContent());
-        post.setUnhealth_info(addPostBO.isUnhealth());
+        post.setUnhealth(addPostBO.isUnhealth());
         post = postService.save(post);
 
         PostBO postBO = new PostBO();
         postBO.setUser(user);
         postBO.getPostList().add(post);
         if (addPostBO.isUnhealth()) {
-            postBO.setMsg("Your upload has Sensitive Words!");
+            Integer num = postService.checkUnhealthCountWith(user.getId());
+            if (num > 2) {
+                userService.deactivate(user.getUsername());
+                postBO.setMsg("Your Account has Locked! Please Connect Manager");
+            } else {
+                postBO.setMsg("Your upload has Sensitive Words!");
+            }
         } else {
             postBO.setMsg("");
         }

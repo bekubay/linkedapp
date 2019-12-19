@@ -60,4 +60,9 @@ public class PostService implements IPostService {
     public Post getPost(Long id) {
         return postDao.findPostById(id);
     }
+
+    @Override
+    public Integer checkUnhealthCountWith(Long userId) {
+        return postDao.countAllByOwnerIdAndUnhealth(userId, true);
+    }
 }

@@ -27,7 +27,7 @@ $(function () {
     });
 
     $.addItem = function(postItem, user) {
-        if (postItem.unhealth_info == true) {
+        if (postItem.unhealth == true) {
             return "";
         }
         var itemDetail = '';
