@@ -11,6 +11,6 @@ import java.util.List;
 public interface IPostRepository extends JpaRepository<Post, Long> {
     public List<Post> findByOwnerIs(User user);
     public Post findPostById(Long id);
-    @Query(value = "select * from post p where p.user_id in (select followee_id from user u join user_network un where u.id = :id1 and u.id = un.follower_id union select :id2 as followee_id)", nativeQuery = true)
+    @Query(value = "select * from post p where p.user_id in (select followee_id from user u join user_network un where u.id = :id1 and u.id = un.follower_id union select :id2 as followee_id) order by p.date", nativeQuery = true)
     public List<Post> findAllByUserWithFollowers(Long id1, Long id2);
 }

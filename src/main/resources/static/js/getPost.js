@@ -5,18 +5,31 @@ $(function () {
             alert("Content should not plain");
             return;
         }
-        $.post("/user/submitPost", {
-            content : content,
-            contentType:'application/json;charset=utf-8'
+        var file = $("#picSelect").attr("title");
+        $.ajax("/user/submitPost", {
+            type : "POST",
+            dataType : 'JSON',
+            data : JSON.stringify({"content": content, "file": file, "unhealth": false}),
+            contentType : 'application/json'
         }).done(function (data) {
-            $("#postTextArea").val("");
-            $("#postList").prepend($.addItem(data.postList[0], data.user));
+            if (data.msg.length > 0) {
+                alert(data.msg);
+            } else {
+                $("#postTextArea").val("");
+                $("#picSelect").attr("title", "")
+                $("#notice_node").removeClass("notice");
+                $("#btn_toolBar").removeClass("selectBtn");
+                $("#postList").prepend($.addItem(data.postList[0], data.user));
+            }
         }).fail(function (xhr, status, exception) {
             alert(status, exception);
         });
     });
 
     $.addItem = function(postItem, user) {
+        if (postItem.unhealth_info == false) {
+            return "";
+        }
         var itemDetail = '';
         var hasLiked = "like";
         var hasLikedClass = "";
@@ -33,14 +46,14 @@ $(function () {
         itemDetail += '<a href="/user/profile/' + postItem.owner.username + '" class="post-avatar thumbnail post-thumbnail"><img src="' + ((postItem.owner.portrait != null && postItem.owner.portrait !== "") ? "/userimg/" + postItem.owner.portrait : "/img/user.png") + '" alt=""/><div class="text-center">'+ postItem.owner.username +'</div></a>';
         itemDetail += '<div class="likes text-center datePosition" id="likeCount"><span class="date">' + DateFormat.format.prettyDate(postItem.date) + '</span></div></div>';
         itemDetail += '<div class="col-sm-10"><div class="bubble"><div class="pointer"><p>';
-        if (postItem.attachType == 0) {
-            itemDetail += postItem.text + '</p></div>';
-        } else if (postItem.attachType == 1) {
-            itemDetail += '<img src="' + postItem.attach + '" rel="" /></p></div>';
-        } else {
-            itemDetail += '<video src="' + postItem.attach + '"  controls="controls">Your browser does not support the video tag.</video></p></div>';
+        itemDetail += postItem.text + '</p>';
+        if (postItem.attachType == 1) {
+            itemDetail += '<p><img src="' + postItem.attach + '" rel="" /></p>';
+        } else if (postItem.attachType == 2) {
+            itemDetail += '<p><video src="' + postItem.attach + '"  controls="controls">Your browser does not support the video tag.</video></p>';
             // width="320" height="240"
         }
+        itemDetail += "</div>"
         itemDetail += '<div class="pointer-border"></div></div>';
         itemDetail += '<p class="post-actions"><div class="heart' + hasLikedClass + '" id="like_' + postItem.id + '" rel="'+ hasLiked +'"></div><div class="likeCount" id="likeCount' + postItem.id + '">' + postItem.likedBy.length + '</div></p>';
         itemDetail += '<div class="comment-form">' +

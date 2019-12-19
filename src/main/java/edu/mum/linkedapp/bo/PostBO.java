@@ -11,4 +11,5 @@ import java.util.List;
 public class PostBO {
     private List<Post> postList = new ArrayList<>();
     private User user;
+    private String msg;
 }

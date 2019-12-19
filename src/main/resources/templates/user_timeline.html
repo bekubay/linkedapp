@@ -1,14 +1,13 @@
-
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout_user}">
 <head>
     <meta charset="utf-8">
     <title>LinkedApp Social Network</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"/>
-    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}" type="text/css" />
-    <link rel="stylesheet" href="../static/css/heart.css" th:href="@{/css/heart.css}" type="text/css" />
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}" type="text/css"/>
+    <link rel="stylesheet" href="../static/css/heart.css" th:href="@{/css/heart.css}" type="text/css"/>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="../static/js/dateFormat.js" th:src="@{/js/dateFormat.js}" type="text/javascript"></script>
     <script src="../static/js/uploadFile.js" th:src="@{/js/uploadFile.js}" type="text/javascript"></script>
@@ -22,26 +21,37 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-md-8"  layout:fragment="main_section">
+            <div class="col-md-8" layout:fragment="main_section">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"  th:text="#{user_timeline.page.wall}"></h3>
+                        <h3 class="panel-title" th:text="#{user_timeline.page.wall}"></h3>
                     </div>
                     <div class="panel-body">
-                        <form id="uploadPost" name="uploadPost" method="POST" target="/user/submitPost" >
+                        <form id="uploadPost" name="uploadPost" method="POST" target="/user/submitPost">
                             <div class="form-group">
-                                <textarea id="postTextArea" class="form-control" placeholder="Write on the wall"></textarea>
+                                <textarea id="postTextArea" class="form-control"
+                                          placeholder="Write on the wall"></textarea>
                             </div>
-                            <button id="postSubmit" type="button" class="btn btn-default" th:text="#{user_timeline.page.submit}"></button>
+                            <button id="postSubmit" type="button" class="btn btn-default"
+                                    th:text="#{user_timeline.page.submit}"></button>
                             <div class="pull-right">
-                                <div class="btn-toolbar">
-                                    <button type="button" class="btn btn-default">
-                                        <i class="fa fa-file-image-o"><span th:text="#{user_timeline.page.image}"></span></i> / <i class="fa fa-file-video-o"><span th:text="#{user_timeline.page.Vidoe}"></span></i>
-                                        <input type="file" id="myfile" class="myfile" name="myfile" accept="video/*,  video/x-m4v, video/webm, video/x-ms-wmv, video/x-msvideo, video/3gpp, video/flv, video/x-flv, video/mp4, video/quicktime, video/mpeg, video/ogv, .ts, .mkv, image/*, image/heic, image/heif" display="inline" />
-                                    </button>
-<!--                                    <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>-->
-<!--                                    <button type="button" class="btn btn-default"> <i class="fa fa-file-image-o"></i>Image</button>-->
-<!--                                    <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button>-->
+                                <div id="btn_toolBar" class="btn-toolbar">
+                                    <a id="picSelect" title="">
+                                        <button type="button" class="btn btn-default">
+                                            <i class="fa fa-file-image-o"><span
+                                                    th:text="#{user_timeline.page.image}"></span></i> / <i
+                                                class="fa fa-file-video-o"><span
+                                                th:text="#{user_timeline.page.Vidoe}"></span></i>
+                                            <input type="file" id="myfile" class="myfile" name="myfile"
+                                                   accept="video/*,  video/x-m4v, video/webm, video/x-ms-wmv, video/x-msvideo, video/3gpp, video/flv, video/x-flv, video/mp4, video/quicktime, video/mpeg, video/ogv, .ts, .mkv, image/*, image/heic, image/heif"
+                                                   display="inline"/>
+                                        </button>
+                                    </a>
+                                    <div id="notice_node" class=""></div>
+                                    <!-- <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i>Text</button>-->
+                                    <!-- <button type="button" class="btn btn-default"> <i class="fa fa-file-image-o"></i>Image</button>-->
+                                    <!-- <button type="button" class="btn btn-default"><i class="fa fa-file-video-o"></i>Video</button>-->
+
                                 </div>
                             </div>
                         </form>

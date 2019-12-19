@@ -1,5 +1,6 @@
 package edu.mum.linkedapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -38,6 +39,12 @@ public class Post implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;
+
+    /*
+    * default is false, not unhealth info
+    * */
+    @Column(columnDefinition = "tinyint(1) default 0")
+    private boolean unhealth_info;
 
     @OneToMany
     private Set<User> likedBy = new HashSet<>();

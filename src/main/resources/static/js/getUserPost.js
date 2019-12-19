@@ -17,6 +17,9 @@ $(function () {
     });
 
     $.addItem = function(postItem, user) {
+        if (postItem.unhealth_info == false) {
+            return "";
+        }
         var itemDetail = '';
         var hasLiked = "like";
         var hasLikedClass = "";
@@ -33,14 +36,14 @@ $(function () {
         itemDetail += '<a href="/user/profile/' + postItem.owner.username + '" class="post-avatar thumbnail post-thumbnail"><img src="' + ((postItem.owner.portrait != null && postItem.owner.portrait !== "") ? "/userimg/" + postItem.owner.portrait : "/img/user.png") + '" alt=""/><div class="text-center">'+ postItem.owner.username +'</div></a>';
         itemDetail += '<div class="likes text-center datePosition" id="likeCount"><span class="date">' + DateFormat.format.prettyDate(postItem.date) + '</span></div></div>';
         itemDetail += '<div class="col-sm-10"><div class="bubble"><div class="pointer"><p>';
-        if (postItem.attachType == 0) {
-            itemDetail += postItem.text + '</p></div>';
-        } else if (postItem.attachType == 1) {
-            itemDetail += '<img src="' + postItem.attach + '" rel="" /></p></div>';
-        } else {
-            itemDetail += '<video src="' + postItem.attach + '"  controls="controls">Your browser does not support the video tag.</video></p></div>';
+        itemDetail += postItem.text + '</p>';
+        if (postItem.attachType == 1) {
+            itemDetail += '<p><img src="' + postItem.attach + '" rel="" /></p>';
+        } else if (postItem.attachType == 2) {
+            itemDetail += '<p><video src="' + postItem.attach + '"  controls="controls">Your browser does not support the video tag.</video></p>';
             // width="320" height="240"
         }
+        itemDetail += "</div>"
         itemDetail += '<div class="pointer-border"></div></div>';
         itemDetail += '<p class="post-actions"><div class="heart' + hasLikedClass + '" id="like_' + postItem.id + '" rel="'+ hasLiked +'"></div><div class="likeCount" id="likeCount' + postItem.id + '">' + postItem.likedBy.length + '</div></p>';
         itemDetail += '<div class="comment-form">' +

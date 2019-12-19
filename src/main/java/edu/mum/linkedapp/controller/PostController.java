@@ -1,5 +1,6 @@
 package edu.mum.linkedapp.controller;
 
+import edu.mum.linkedapp.bo.AddPostBO;
 import edu.mum.linkedapp.bo.CommentBO;
 import edu.mum.linkedapp.bo.CommentLikeBO;
 import edu.mum.linkedapp.bo.PostBO;
@@ -36,39 +37,48 @@ public class PostController {
     public static final Pattern urlPattern= Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]",
             Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 
-    @RequestMapping(value = "/submitPost", method = RequestMethod.POST, produces = "application/json")
+    @PostMapping(value = "/submitPost", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public PostBO submitPost(@RequestParam("content") String content, Model model, Principal principal) {
-        Matcher m = urlPattern.matcher(content);//replace with string to compare
-        boolean result = m.find();
+    public PostBO submitPost(@RequestBody AddPostBO addPostBO, Model model, Principal principal) {
         int attachType = 0;
         String attach = "";
-        if (result) {
-            System.out.println("String contains URL");
-            attach = m.group(0);
+        if (addPostBO.getFile()!=null && addPostBO.getFile().length()>0) {
+            attach = addPostBO.getFile();
+            Matcher m = urlPattern.matcher(addPostBO.getFile());
+            boolean result = m.find();
+            if (result) {
+                System.out.println("String contains URL");
+                attach = m.group(0);
+            }
+            // video/*,  video/x-m4v, video/webm, video/x-ms-wmv, video/x-msvideo, video/3gpp, video/flv, video/x-flv, video/mp4, video/quicktime, video/mpeg, video/ogv, .ts, .mkv,
+            // image/*, image/heic, image/heif
+            String lowcaseAttach = attach.toLowerCase();
+            if (lowcaseAttach.endsWith(".jpg") || lowcaseAttach.endsWith(".jpeg") || lowcaseAttach.endsWith(".png") ||
+                    lowcaseAttach.endsWith(".gif") || lowcaseAttach.endsWith(".heic") || lowcaseAttach.endsWith(".heif")) {
+                attachType = 1;
+            } else {
+                attachType = (attach != null && attach.length() > 0) ? 2 : 0;
+            }
         }
 
-        // video/*,  video/x-m4v, video/webm, video/x-ms-wmv, video/x-msvideo, video/3gpp, video/flv, video/x-flv, video/mp4, video/quicktime, video/mpeg, video/ogv, .ts, .mkv,
-        // image/*, image/heic, image/heif
-        String lowcaseAttach = attach.toLowerCase();
-        if (lowcaseAttach.endsWith(".jpg") || lowcaseAttach.endsWith(".jpeg") || lowcaseAttach.endsWith(".png") ||
-                lowcaseAttach.endsWith(".gif") || lowcaseAttach.endsWith(".heic") || lowcaseAttach.endsWith(".heif")) {
-            attachType = 1;
-        } else {
-            attachType = (attach != null && attach.length() > 0) ? 2 : 0;
-        }
         User user = userService.findByUsername(principal.getName()).get();
         Post post = new Post();
         post.setDate(new Date());
         post.setAttach(attach);
         post.setAttachType(attachType);
         post.setOwner(user);
-        post.setText(content);
+        post.setText(addPostBO.getContent());
+        post.setUnhealth_info(addPostBO.isUnhealth());
         post = postService.save(post);
 
         PostBO postBO = new PostBO();
         postBO.setUser(user);
         postBO.getPostList().add(post);
+        if (addPostBO.isUnhealth()) {
+            postBO.setMsg("Your upload has Sensitive Words!");
+        } else {
+            postBO.setMsg("");
+        }
         return postBO;
     }
 

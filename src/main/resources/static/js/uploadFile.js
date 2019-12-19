@@ -16,10 +16,9 @@ $(function () {
             enctype : "multipart/form-data",
             data : formData
         }).done(function (data) {
-            console.log(data);
-            console.log($("#postTextArea"));
-            $("#postTextArea").val(data);
-            console.log($("#postTextArea"));
+            $("#btn_toolBar").addClass("selectBtn");
+            $("#picSelect").attr("title", data);
+            $("#notice_node").addClass("notice");
         }).fail(function (xhr, status, exception) {
             alert(status, exception);
         });
