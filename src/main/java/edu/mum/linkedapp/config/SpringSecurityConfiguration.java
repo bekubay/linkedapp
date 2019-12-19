@@ -2,6 +2,7 @@ package edu.mum.linkedapp.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-
+//@EnableOAuth2Sso
 @EnableWebSecurity
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -32,7 +33,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/advert/**").hasAnyRole("ADMIN","MARKETING")
                 .antMatchers("/user/**").hasAnyRole("USER","MARKETING","ADMIN")
-                .antMatchers("/", "/login").permitAll()
+                .antMatchers("/", "/login", "/webjars/**", "/error**").permitAll()
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/user/home").and()
                 .logout()
                 .logoutUrl("/user/logout") //change default /logout url to /perform_logout

@@ -1,8 +1,10 @@
 package edu.mum.linkedapp.service.impl;
 
+import edu.mum.linkedapp.domain.Advert;
 import edu.mum.linkedapp.domain.Profile;
 import edu.mum.linkedapp.domain.Role;
 import edu.mum.linkedapp.domain.User;
+import edu.mum.linkedapp.repository.AdvertRepository;
 import edu.mum.linkedapp.repository.IRoleRepository;
 import edu.mum.linkedapp.repository.IUserRepository;
 import edu.mum.linkedapp.service.IUserService;
@@ -18,6 +20,9 @@ public class UserService implements IUserService {
     private IUserRepository userRepository;
     @Autowired
     private IRoleRepository roleRepository;
+
+    @Autowired
+    private AdvertRepository advertRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -102,5 +107,10 @@ public class UserService implements IUserService {
     @Override
     public List<User> findByNameLike(String name){
         return userRepository.findByNameLike(name);
+    }
+
+    @Override
+    public List<Advert> selectRandomAdverts() {
+        return advertRepository.selectRandomAdverts();
     }
 }
